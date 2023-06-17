@@ -82,7 +82,7 @@ const Navbar = () => {
           <nav class="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
             <div class="container-fluid justify-content-center col-lg-10">
               <button
-                class="navbar-toggler"
+                class="navbar-toggler me-5 me-sm-3"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
