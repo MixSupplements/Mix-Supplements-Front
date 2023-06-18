@@ -29,7 +29,7 @@ const ProductCard = ({ img, rating, name, price, wish, cart }) => {
                   },
             }}
             value={rating}
-            precision={"0.5"}
+            precision={0.5}
             readOnly
           />
           <h5 className="card-title product-card-title mt-3">
