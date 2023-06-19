@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 import "./Home.css";
 
@@ -108,7 +109,9 @@ const Home = () => {
                 <div className="overlay"></div>
                 <div className="carousel-caption ">
                   <h5>Sports Supplements</h5>
+                  <NavLink to='/shop'>
                   <button className="btn home-button">Check products</button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -127,7 +130,9 @@ const Home = () => {
                 <div className="overlay"></div>
                 <div className="carousel-caption ">
                   <h5>Bars & Snacks</h5>
-                  <button className="btn home-button">Check products</button>
+                  <NavLink to='/shop'>
+                    <button className="btn home-button">Check products</button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -144,7 +149,9 @@ const Home = () => {
                 <div className="overlay"></div>
                 <div className="carousel-caption ">
                   <h5>Vitamins & Minerals</h5>
-                  <button className="btn home-button">Check products</button>
+                  <NavLink to='/shop'>
+                    <button className="btn home-button">Check products</button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -161,7 +168,9 @@ const Home = () => {
                 <div className="overlay"></div>
                 <div className="carousel-caption ">
                   <h5>Healthy Food</h5>
-                  <button className="btn home-button">Check products</button>
+                  <NavLink to='/shop'>
+                    <button className="btn home-button">Check products</button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -178,7 +187,9 @@ const Home = () => {
                 <div className="overlay"></div>
                 <div className="carousel-caption ">
                   <h5>Fitness Equipment</h5>
-                  <button className="btn home-button">Check products</button>
+                  <NavLink to='/shop'>
+                    <button className="btn home-button">Check products</button>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -193,68 +204,11 @@ const Home = () => {
       >
         <ProductCard
           img={"image_512.png"}
-          rating={"3"}
+          rating={3}
           name={"Creatine Monohydrate"}
           price={"3,499"}
           cart={true}
           wish={false}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"2.5"}
-          name={"Creatine Monohydrate"}
-          price={"5,000"}
-          cart={false}
-          wish={true}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"4.5"}
-          name={"Creatine Monohydrate"}
-          price={"2,899"}
-          cart={true}
-          wish={true}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"3"}
-          name={"Creatine Monohydrate"}
-          price={"4,499"}
-          cart={true}
-          wish={false}
-        />
-
-        <ProductCard
-          img={"image_512.png"}
-          rating={"5"}
-          name={"Creatine Monohydrate"}
-          price={"3,499"}
-          cart={false}
-          wish={true}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"1.5"}
-          name={"Creatine Monohydrate"}
-          price={"3,499"}
-          cart={true}
-          wish={false}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"2"}
-          name={"Creatine Monohydrate"}
-          price={"3,499"}
-          cart={false}
-          wish={false}
-        />
-        <ProductCard
-          img={"image_512.png"}
-          rating={"1"}
-          name={"Creatine Monohydrate"}
-          price={"3,499"}
-          cart={true}
-          wish={true}
         />
       </section>
     </>
