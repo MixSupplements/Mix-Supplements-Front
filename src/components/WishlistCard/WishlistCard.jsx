@@ -5,13 +5,13 @@ import "./WishlistCard.css";
 export default function WishlistCard() {
   return (
     <>
-      <div className="card mb-3">
+      <div className="card wishlist-card mb-3">
         <div className="row g-0">
           <div className="col-4 wishlist-card-image">
             <img src="..." className="img-fluid rounded-start" alt="..." />
           </div>
           <div className="col-8">
-            <div className="card-body">
+            <div className="card-body wishlist-card-body">
               <h5 className="card-title">
                 Card titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
               </h5>

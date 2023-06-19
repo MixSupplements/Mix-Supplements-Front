@@ -36,17 +36,18 @@ const Navbar = () => {
               </form>
             </div>
             <div className="col-3 col-sm-3 col-md-2 col-lg-2 px-0 mx-0 mt-3 flex-nowrap row pe-3 pe-sm-4 pe-md-0 ps-lg-3 ps-md-1">
-              <div className="col-6 col-md-4 text-start ps-sm-2 ps-md-0 mx-0 px-0">
+              <div className="col-6 col-md-5 text-start ps-sm-2 ps-md-0 mx-0 px-0">
                 <Link to="/">
                   <FontAwesomeIcon
                     icon={faCartShopping}
                     size="lg"
                     style={{ color: "#ffffff" }}
                   />
+                  <div className="cart-badge">999</div>
                 </Link>
               </div>
 
-              <div className="col-6 col-md-8 text-lg-start text-md-center pe-md-4 mx-0 px-0 text-start ps-lg-3 dropdown">
+              <div className="col-6 col-md-7 text-lg-start text-md-center pe-md-4 mx-0 px-0 text-start ps-lg-1 dropdown">
                 <button
                   className=" dropdown-toggle navUserBtn"
                   data-bs-toggle="dropdown"

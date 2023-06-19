@@ -1,8 +1,8 @@
-.card {
+.wishlist-card {
   box-shadow: 5px 5px 5px var(--clr-primary-400);
   border: none !important;
 }
-.card-body {
+.wishlist-card-body {
   background-color: var(--clr-neutral-700) !important;
   color: var(--clr-primary-400) !important;
 }

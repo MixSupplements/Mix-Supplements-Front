@@ -40,6 +40,16 @@ header .dropdown-menu {
 header .dropdown-item {
   background-color: var(--clr-neutral-700) !important;
 }
+header .cart-badge {
+  text-align: center;
+  background-color: var(--clr-primary-400);
+  color: var(--clr-neutral-700);
+  font-weight: bold;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0 2px;
+  margin-left: 1px;
+}
 /* nav .active {
 
 } */
