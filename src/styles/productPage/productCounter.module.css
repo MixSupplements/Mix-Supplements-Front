@@ -1,0 +1,25 @@
+.counter {
+    display: flex;
+    align-items: center;
+    margin-block: var(--size-500);
+    gap: var(--size-400);
+}
+
+.counter-btn {
+    background-color: var(--clr-primary-400) !important;
+    color: black !important;
+    transition: 0.3s all !important;
+    padding-inline: 6px !important;
+    &:hover {
+        background-color: var(--clr-secondary-400) !important;
+    }
+}
+
+.counter-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    font-size: 20px;
+    font-weight: var(--fw-bold);
+}
