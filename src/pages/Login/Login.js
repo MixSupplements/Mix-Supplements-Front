@@ -1,12 +1,12 @@
 import React from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Login() {
   return (
-    <div className="login template d-flex justify-content-center align-items-center vh-100 bg-black">
-      <div className="form_container p-5 rounded bg-white">
-        <form>
+    <div className="login template d-flex justify-content-center align-items-center">
+      <div className="form_container rounded bg-white">
+        <form className="border border-white rounded-2 p-5">
           <h3 className=" text-center mb-4">Sign In</h3>
 
           <div className="form-floating mb-3">
@@ -51,7 +51,7 @@ function Login() {
           </div>
 
           <p className="text-start mt-2 mb-2">
-            Forget <a href="">Password?</a>
+            Forget <NavLink>Password?</NavLink>
           </p>
 
           <p className="info text-start mt-2">

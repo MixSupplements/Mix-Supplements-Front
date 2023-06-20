@@ -73,7 +73,7 @@ const ProductReview = () => {
                         />
                     </div>
                     <div className={`form-group`} style={{ marginBottom: "var(--size-500)" }}>
-                        <label for="comment" className="form-label">
+                        <label htmlFor="comment" className="form-label">
                             Your Review
                         </label>
                         <textarea

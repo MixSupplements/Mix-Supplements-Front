@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 function Signup() {
   return (
-    <div className="signup template d-flex justify-content-center align-items-center vh-100 bg-black">
-      <div className="form_container p-5 rounded bg-white">
-        <form>
+    <div className="signup template d-flex justify-content-center align-items-center">
+      <div className="form_container rounded bg-white">
+        <form className="border border-white rounded-2 p-5">
           <h3 className=" text-center mb-4">Sign Up</h3>
           {/* <img src="./../public/logo192.png" /> */}
 
@@ -39,33 +39,33 @@ function Signup() {
             <label htmlFor="floatingInput">Phone Number</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div className="form-floating mb-3">
             <input
               type="email"
               className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
             />
-            <label for="floatingInput">Email address</label>
+            <label htmlFor="floatingInput">Email address</label>
           </div>
-          <div class="form-floating mb-3">
+          <div className="form-floating mb-3">
             <input
               type="password"
               className="form-control"
               id="floatingPassword"
               placeholder="Password"
             />
-            <label for="floatingPassword">Password</label>
+            <label htmlFor="floatingPassword">Password</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div className="form-floating mb-3">
             <input
               type="password"
               className="form-control"
               id="floatingPassword"
               placeholder="Password"
             />
-            <label for="floatingPassword">Confirm Password</label>
+            <label htmlFor="floatingPassword">Confirm Password</label>
           </div>
           <div className="d-grid">
             <button className="in-btn btn btn-primary">

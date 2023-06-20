@@ -37,7 +37,7 @@ const Navbar = () => {
             </div>
             <div className="col-3 col-sm-3 col-md-2 col-lg-2 px-0 mx-0 mt-3 flex-nowrap row pe-3 pe-sm-4 pe-md-0 ps-lg-3 ps-md-1">
               <div className="col-6 col-md-5 text-start ps-sm-2 ps-md-0 mx-0 px-0">
-                <Link to="/">
+                <Link to="/cart">
                   <FontAwesomeIcon
                     icon={faCartShopping}
                     size="lg"
@@ -62,7 +62,7 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink className="dropdown-item" to="">
+                    <NavLink className="dropdown-item" to="/login">
                       My Account
                     </NavLink>
                   </li>
@@ -80,10 +80,10 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <nav class="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
-            <div class="container-fluid justify-content-center col-lg-10">
+          <nav className="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
+            <div className="container-fluid justify-content-center col-lg-10">
               <button
-                class="navbar-toggler me-5 me-sm-3"
+                className="navbar-toggler me-5 me-sm-3"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -91,10 +91,10 @@ const Navbar = () => {
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
-                <span class="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
               </button>
               <div
-                class="flex-grow-0 d-none d-lg-block"
+                className="flex-grow-0 d-none d-lg-block"
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
@@ -119,12 +119,12 @@ const Navbar = () => {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink className="dropdown-item" to="">
+                        <NavLink className="dropdown-item" to="/shop">
                           Supplements
                         </NavLink>
                       </li>
                       <li>
-                        <NavLink className="dropdown-item" to="">
+                        <NavLink className="dropdown-item" to="/shop">
                           Sportswear
                         </NavLink>
                       </li>
@@ -147,7 +147,7 @@ const Navbar = () => {
           </nav>
         </div>
         <div
-          class="collapse navbar-collapse flex-grow-0 d-lg-none"
+          className="collapse navbar-collapse flex-grow-0 d-lg-none"
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
