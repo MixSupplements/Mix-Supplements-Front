@@ -52,8 +52,8 @@ const ProductDetails = ({ product }) => {
                             typeof value != "object" &&
                             value != null &&
                             !Array.isArray(value) &&
-                            key != "title" &&
-                            key != "rate"
+                            key !== "title" &&
+                            key !== "rate"
                         ) {
                             return (
                                 <div
