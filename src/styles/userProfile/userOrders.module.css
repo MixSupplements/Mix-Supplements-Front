@@ -1,0 +1,23 @@
+.empty-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    font-size: var(--fs-700);
+    font-weight: var(--fw-bold);
+    border-radius: var(--size-400);
+    background-color: var(--clr-neutral-600);
+    color: var(--clr-primary-400);
+}
+
+.user-orders-container {
+    overflow: auto;
+    height: 80vh;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &::-webkit-scrollbar {
+        display: none !important;
+    }
+}
