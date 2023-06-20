@@ -17,11 +17,12 @@
 
 .modal-body,
 .modal-header {
+    color: #fff !important;
     background-color: var(--clr-neutral-600);
 }
 
 .modal-header .btn-close {
-    background-color: white;
+    background-color: #fff;
     opacity: 1;
     border-radius: 50%;
 }
