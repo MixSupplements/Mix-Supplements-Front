@@ -1,8 +1,23 @@
 import { NavLink } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../APIs/config";
 import "./Home.css";
 
+
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[]);
+
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get('/products')
+    .then(res => setProductList(res.data))
+    .catch(err => console.log(err))
+  },[])
+
   return (
     <>
       <section className="row home-section" id="home-hero">
@@ -202,14 +217,20 @@ const Home = () => {
         className="row justify-content-center home-section"
         id="home-products"
       >
-        <ProductCard
-          img={"image_512.png"}
-          rating={3}
-          name={"Creatine Monohydrate"}
-          price={"3,499"}
-          cart={true}
-          wish={false}
-        />
+        {productList.map(product => {
+          return (
+            <ProductCard
+            key={product._id}
+            id={product._id}
+            img={product.images[0]? product.images[0].imageUrl : process.env.PUBLIC_URL + 'images/512x512.png'}
+            rating={product.rating}
+            name={product.name}
+            price={product.price}
+            cart={false}
+            wish={false}
+          />
+          )
+        })}
       </section>
     </>
   );
