@@ -22,10 +22,10 @@ const ProductDetails = ({ product }) => {
                 <Carousel className="productPage-carousel" pause={false} interval={null}>
                     {product.images.map((image, index) => (
                         <Carousel.Item key={index}>
-                            <img src={image} alt={`${image}`} />
+                            <img src={image.imageUrl} alt={`${image.imageUrl}`} />
                             <div
                                 className={styles["magnifier"]}
-                                onClick={() => handleMagnifierClick(image)}
+                                onClick={() => handleMagnifierClick(image.imageUrl)}
                             >
                                 <FontAwesomeIcon size="2xl" icon={faMagnifyingGlassPlus} />
                             </div>
@@ -42,12 +42,12 @@ const ProductDetails = ({ product }) => {
                 </Modal>
             </div>
             <div className="col">
-                <h4>{product.title}</h4>
+                <h4>{product.name}</h4>
                 <div style={{ marginBottom: "var(--size-400)" }}>
-                    <ProductRate rate={product.rate} readonly={true} />
+                    <ProductRate rate={Number(product.rating)} readonly={true} />
                 </div>
                 <div className="list-group ">
-                    {Object.entries(product).map(([key, value]) => {
+                    {Object.entries(product.details).map(([key, value]) => {
                         if (
                             typeof value != "object" &&
                             value != null &&

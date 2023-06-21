@@ -1,0 +1,28 @@
+.user-nav-pills .nav-link {
+    color: #fff !important;
+    &:hover {
+        color: var(--clr-primary-400) !important;
+    }
+}
+
+.user-nav-pills .nav-item:not(:last-child) {
+    margin-bottom: 0.5rem !important;
+}
+
+.user-nav-pills .nav-link.active,
+.user-nav-pills .show > .nav-link {
+    color: #000 !important;
+    background-color: var(--clr-primary-400) !important;
+}
+
+.control-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--size-300);
+}
+
+.control-tabs-group {
+    height: fit-content;
+    background-color: var(--clr-neutral-600);
+    border-radius: var(--size-300);
+}
