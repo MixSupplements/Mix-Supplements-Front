@@ -13,7 +13,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control login-form-control"
               placeholder="First name"
               aria-label="First name"
             />
@@ -22,7 +22,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="text"
-              className="form-control"
+              className="form-control login-form-control"
               placeholder="Last name"
               aria-label="Last name"
             />
@@ -32,7 +32,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="string"
-              className="form-control"
+              className="form-control login-form-control"
               placeholder="Phone Number"
               aria-label="Phone Number"
             />
@@ -42,7 +42,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="email"
-              className="form-control"
+              className="form-control login-form-control"
               id="floatingInput"
               placeholder="name@example.com"
             />
@@ -51,7 +51,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="password"
-              className="form-control"
+              className="form-control login-form-control"
               id="floatingPassword"
               placeholder="Password"
             />
@@ -61,7 +61,7 @@ function Signup() {
           <div className="form-floating mb-3">
             <input
               type="password"
-              className="form-control"
+              className="form-control login-form-control"
               id="floatingPassword"
               placeholder="Password"
             />

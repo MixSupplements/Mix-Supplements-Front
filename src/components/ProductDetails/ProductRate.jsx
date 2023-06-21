@@ -13,7 +13,7 @@ const ProductRate = ({ rate, setNewRate, readonly }) => {
                 },
             }}
             value={rate}
-            precision={readonly ? "0.5" : "1"}
+            precision={readonly ? 0.5 : 1}
             readOnly={readonly}
             onChange={(e, newRate) => {
                 setNewRate(newRate);

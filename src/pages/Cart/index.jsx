@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import CartCard from "../../components/CartCard";
 
 const Cart = () => {
+    useEffect(() => {
+        window.scrollTo(0,0);
+      },[])
     return ( 
         <div className="text-center">
             <h2>My Cart</h2>

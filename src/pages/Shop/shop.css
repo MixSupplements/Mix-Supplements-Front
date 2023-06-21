@@ -34,4 +34,5 @@
 .load-btn{
     background-color: var(--clr-primary-400) !important;
     font-weight: var(--fw-semi-bold) !important;
+    max-height: var(--size-700);
 }

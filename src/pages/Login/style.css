@@ -15,7 +15,7 @@
   }
 }
 
-.form-control {
+.login-form-control {
   border: none;
   border-bottom: 1px solid var(--clr-primary-400);
   border-radius: 0;
@@ -23,11 +23,11 @@
 div label {
   color: var(--clr-neutral-900) !important;
 }
-.form-control:focus {
+.login-form-control:focus {
   box-shadow: none;
   border-bottom-color: var(--clr-primary-400);
 }
-.form-control:focus + label {
+.login-form-control:focus + label {
   color: var(--clr-neutral-900);
 }
 .form {

@@ -1,8 +1,21 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 import ProductCard from "../../components/ProductCard";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../APIs/config";
 import "./shop.css";
 
 const Shop = () => {
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    axiosInstance.get('/products')
+    .then(res => setProductList(res.data))
+    .catch(err => console.log(err))
+  },[]);
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[])
   return (
     <div className="row justify-content-between">
       <aside className="col-md-3 px-0 shop-filters-section">
@@ -246,14 +259,20 @@ const Shop = () => {
         </div>
       </aside>
       <main className="row col-md-9 justify-content-center">
-        <ProductCard
-          img={"image_512.png"}
-          rating={4.5}
-          name={"Creatine Monohydrate"}
-          price={"2,899"}
-          cart={true}
-          wish={true}
-        />
+      {productList.map(product => {
+          return (
+            <ProductCard
+            key={product._id}
+            id={product._id}
+            img={product.images[0]? product.images[0].imageUrl : process.env.PUBLIC_URL + 'images/512x512.png'}
+            rating={product.rating}
+            name={product.name}
+            price={product.price}
+            cart={false}
+            wish={false}
+          />
+          )
+        })}
         <div className="row justify-content-center mt-4">
           <button className="btn load-btn">LOAD MORE</button>
           {/* <Pagination
