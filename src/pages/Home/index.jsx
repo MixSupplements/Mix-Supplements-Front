@@ -221,13 +221,7 @@ const Home = () => {
           return (
             <ProductCard
             key={product._id}
-            id={product._id}
-            img={product.images[0]? product.images[0].imageUrl : process.env.PUBLIC_URL + 'images/512x512.png'}
-            rating={product.rating}
-            name={product.name}
-            price={product.price}
-            cart={false}
-            wish={false}
+            product={product}
           />
           )
         })}
