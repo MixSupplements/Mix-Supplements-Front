@@ -8,10 +8,14 @@ import Shop from "../pages/Shop";
 import Wishlist from "../pages/Wishlist/Wishlist";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
+import AdminLayout from "../layouts/AdminLayout";
 
 const AppRouter = () => {
     return (
         <Routes>
+            <Route path="/Admin/Dashboard" element={<AdminLayout />} >
+
+            </Route>
             <Route element={<PrimaryLayout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />}></Route>
