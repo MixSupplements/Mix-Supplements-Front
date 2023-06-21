@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../../assets/images/logo.png";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const cartCounter = useSelector((store) => store.cart.count)
   return (
     <>
       <header className="fixed-top row justify-content-center col-12 pt-2">
@@ -43,7 +45,7 @@ const Navbar = () => {
                     size="lg"
                     style={{ color: "#ffffff" }}
                   />
-                  <div className="cart-badge">999</div>
+                  <div className="cart-badge">{cartCounter}</div>
                 </Link>
               </div>
 
