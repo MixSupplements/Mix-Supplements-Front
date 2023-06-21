@@ -1,5 +1,5 @@
 import React from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./Login.css";
 import { Link, NavLink } from "react-router-dom";
 
