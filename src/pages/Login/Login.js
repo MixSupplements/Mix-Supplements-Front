@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import { Link, NavLink } from "react-router-dom";
 
 function Login() {
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[]);
   return (
     <div className="login template d-flex justify-content-center align-items-center">
       <div className="form_container rounded bg-white">
@@ -12,7 +15,7 @@ function Login() {
           <div className="form-floating mb-3">
             <input
               type="email"
-              className="form-control"
+              className="form-control login-form-control"
               id="floatingInput"
               placeholder="name@example.com"
             />
@@ -21,7 +24,7 @@ function Login() {
           <div className="form-floating mb-3">
             <input
               type="password"
-              className="form-control"
+              className="form-control login-form-control"
               id="floatingPassword"
               placeholder="Password"
             />
