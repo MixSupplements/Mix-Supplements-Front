@@ -1,8 +1,15 @@
 import { Rating } from "@mui/material";
 import "./ProductCard.css";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({ img, rating, name, price, wish, cart }) => {
+const ProductCard = ({ id, img, rating, name, price, wish, cart }) => {
+
+  const navigate = useNavigate();
+
+  const goToDetails = () => {
+    navigate(`/shop/product/${id}`)
+  }
+
   const fillCart = () => {
     return cart;
   };
@@ -12,10 +19,9 @@ const ProductCard = ({ img, rating, name, price, wish, cart }) => {
   };
   return (
     <div className="col-5 col-md-4 col-lg-3 p-2">
-      <NavLink className="text-decoration-none" to="/shop/product/72534">
-        <div className="card product-card">
+        <div className="card product-card" onClick={goToDetails}>
           <img
-            src={process.env.PUBLIC_URL + "images/" + img}
+            src={img}
             className="card-img-top"
             alt="..."
           />
@@ -52,7 +58,6 @@ const ProductCard = ({ img, rating, name, price, wish, cart }) => {
             </div>
           </div>
         </div>
-      </NavLink>
     </div>
   );
 };
