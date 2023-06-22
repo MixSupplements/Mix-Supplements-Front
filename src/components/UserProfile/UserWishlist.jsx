@@ -1,31 +1,45 @@
 import { useState } from "react";
 
-import { Card, Button } from "react-bootstrap";
+import WishlistItem from "./WishlistItem";
 
 import styles from "../../styles/userProfile/userWishlist.module.css";
 
 const UserWishlist = () => {
     const [wishlistItems, setWishlistItems] = useState([
-        // { id: 1, name: "Product 1", image: "image1.jpg" },
-        // { id: 2, name: "Product 2", image: "image2.jpg" },
+        {
+            id: 1,
+            name: "DY Nutrition Creatine Monohydrate-60Serv.-300G.-Unflavored",
+            image: [
+                {
+                    imageUrl:
+                        "https://res.cloudinary.com/deiqhcskg/image/upload/v1687269809/zyur5tsjkgewgorq5v5g",
+                    publicId: "zyur5tsjkgewgorq5v5g",
+                },
+            ],
+            price: 120,
+        },
+        {
+            id: 2,
+            name: "Bad Ass Crea-52Serv.-300G.-Unflavored",
+            image: [
+                {
+                    imageUrl:
+                        "https://res.cloudinary.com/deiqhcskg/image/upload/v1687269809/vfeflpc89cffmp41m6a0",
+                    publicId: "vfeflpc89cffmp41m6a0",
+                },
+            ],
+            price: 170,
+        },
     ]);
 
     const handleRemove = (itemId) => {
         setWishlistItems(wishlistItems.filter((item) => item.id !== itemId));
     };
     return (
-        <div>
+        <div className={styles["user-wishlist-container"]}>
             {wishlistItems.length ? (
                 wishlistItems.map((item) => (
-                    <Card style={{ width: "18rem" }} key={item.id}>
-                        <Card.Img variant="top" src={item.image} />
-                        <Card.Body>
-                            <Card.Title>{item.name}</Card.Title>
-                            <Button variant="danger" onClick={() => handleRemove(item.id)}>
-                                Remove from Wishlist
-                            </Button>
-                        </Card.Body>
-                    </Card>
+                    <WishlistItem key={item.id} item={item} handleRemove={handleRemove} />
                 ))
             ) : (
                 <div className={styles["empty-placeholder"]}>No Product Found</div>
