@@ -49,153 +49,153 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              <div className="col-6 col-md-7 text-lg-start text-md-center pe-md-4 mx-0 px-0 text-start ps-lg-1 dropdown">
-                <button
-                  className=" dropdown-toggle navUserBtn"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                            <div className="col-6 col-md-7 text-lg-start text-md-center pe-md-4 mx-0 px-0 text-start ps-lg-1 dropdown">
+                                <button
+                                    className=" dropdown-toggle navUserBtn"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <FontAwesomeIcon
+                                        className="me-2"
+                                        icon={faUser}
+                                        size="lg"
+                                        style={{ color: "#ffffff" }}
+                                    />
+                                </button>
+                                <ul className="dropdown-menu">
+                                    <li>
+                                        <NavLink className="dropdown-item" to="/login">
+                                            My Account
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className="dropdown-item" to="/user/wishlist">
+                                            My Wishlist
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className="dropdown-item" to="/user/orders">
+                                            My Orders
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <nav className="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
+                        <div className="container-fluid justify-content-center col-lg-10">
+                            <button
+                                className="navbar-toggler me-5 me-sm-3"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span className="navbar-toggler-icon"></span>
+                            </button>
+                            <div
+                                className="flex-grow-0 d-none d-lg-block"
+                                id="navbarSupportedContent"
+                            >
+                                <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+                                    <li className="nav-item">
+                                        <NavLink
+                                            className="nav-link active"
+                                            aria-current="page"
+                                            to="/"
+                                        >
+                                            Home
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <NavLink
+                                            className="nav-link dropdown-toggle"
+                                            to=""
+                                            role="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            Categories
+                                        </NavLink>
+                                        <ul className="dropdown-menu">
+                                            <li>
+                                                <NavLink className="dropdown-item" to="/shop">
+                                                    Supplements
+                                                </NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink className="dropdown-item" to="/shop">
+                                                    Sportswear
+                                                </NavLink>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" aria-current="page" to="">
+                                            Our Stores
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" aria-current="page" to="">
+                                            Contact Us
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="col-lg-2"></div>
+                    </nav>
+                </div>
+                <div
+                    className="collapse navbar-collapse flex-grow-0 d-lg-none"
+                    id="navbarSupportedContent"
                 >
-                  <FontAwesomeIcon
-                    className="me-2"
-                    icon={faUser}
-                    size="lg"
-                    style={{ color: "#ffffff" }}
-                  />
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <NavLink className="dropdown-item" to="/login">
-                      My Account
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="/wishlist">
-                      My Wishlist
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="">
-                      My Orders
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <nav className="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
-            <div className="container-fluid justify-content-center col-lg-10">
-              <button
-                className="navbar-toggler me-5 me-sm-3"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div
-                className="flex-grow-0 d-none d-lg-block"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/"
-                    >
-                      Home
-                    </NavLink>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <NavLink
-                      className="nav-link dropdown-toggle"
-                      to=""
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Categories
-                    </NavLink>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <NavLink className="dropdown-item" to="/shop">
-                          Supplements
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink className="dropdown-item" to="/shop">
-                          Sportswear
-                        </NavLink>
-                      </li>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+                        <li className="nav-item">
+                            <NavLink className="nav-link active" aria-current="page" to="/">
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <NavLink
+                                className="nav-link dropdown-toggle"
+                                to="/"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Categories
+                            </NavLink>
+                            <ul className="dropdown-menu opacity-100 col-12 text-center">
+                                <li>
+                                    <NavLink className="dropdown-item" to="">
+                                        Supplements
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="dropdown-item" to="">
+                                        Sportswear
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" aria-current="page" to="">
+                                Our Stores
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" aria-current="page" to="">
+                                Contact Us
+                            </NavLink>
+                        </li>
                     </ul>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" aria-current="page" to="">
-                      Our Stores
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" aria-current="page" to="">
-                      Contact Us
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-2"></div>
-          </nav>
-        </div>
-        <div
-          className="collapse navbar-collapse flex-grow-0 d-lg-none"
-          id="navbarSupportedContent"
-        >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="/"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Categories
-              </NavLink>
-              <ul className="dropdown-menu opacity-100 col-12 text-center">
-                <li>
-                  <NavLink className="dropdown-item" to="">
-                    Supplements
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="">
-                    Sportswear
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="">
-                Our Stores
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="">
-                Contact Us
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </header>
-    </>
-  );
+                </div>
+            </header>
+        </>
+    );
 };
 
 export default Navbar;

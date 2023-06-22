@@ -9,3 +9,15 @@
     background-color: var(--clr-neutral-600);
     color: var(--clr-primary-400);
 }
+
+.user-wishlist-container {
+    overflow: auto;
+    height: 80vh;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &::-webkit-scrollbar {
+        display: none !important;
+    }
+}
