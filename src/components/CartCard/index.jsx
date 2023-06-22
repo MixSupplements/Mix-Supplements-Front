@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ProductCounter from '../ProductDetails/ProductCounter'
 
 import './CartCard.css'
+import { removeFromCart } from '../../redux/slices/cart';
 
 const CartCard = ({item}) => {
     const dispatcher = useDispatch();
-    const cart = useSelector(store => store.cart);
+    // const cart = useSelector(store => store.cart);
     return ( 
         <div className='row border border-white rounded-1 mb-2 py-3 px-2'>
             <div className='col-2'>
@@ -15,13 +16,13 @@ const CartCard = ({item}) => {
                 <span>{item.name}</span>
             </div>
             <div className='col-2 text-center d-flex flex-column justify-content-center'>
-                <ProductCounter />
+                <ProductCounter key={item._id} item={item} />
             </div>
             <div className='col-2 text-center d-flex flex-column justify-content-center'>
                 <span>{item.price} L.E</span>
             </div>
             <div className='col-1 text-start d-flex flex-column justify-content-center'>
-                <i className="fa-solid fa-trash-can"></i>
+                <i onClick={()=>{dispatcher(removeFromCart({item: item, count: 1}))}} className="fa-solid fa-trash-can"></i>
             </div>
         </div>
      );
