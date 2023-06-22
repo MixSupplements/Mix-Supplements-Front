@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCartPlus, faMagnifyingGlassPlus } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../../styles/productPage/productDetails.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slices/cart";
 
 const ProductDetails = ({ product }) => {
     const [zoomIn, setZoomIn] = useState(false);
@@ -16,6 +18,10 @@ const ProductDetails = ({ product }) => {
         setCurrentImage(imageSrc);
         setZoomIn(true);
     };
+
+    const dispatcher = useDispatch();
+    const cart = useSelector(store => store.cart);
+
     return (
         <div className={`row gap-3 ${styles["details-card"]}`}>
             <div className="col-md-6">
@@ -72,13 +78,18 @@ const ProductDetails = ({ product }) => {
                                 </div>
                             );
                         }
+                        return null;
                     })}
                 </div>
-                <ProductCounter />
+                
                 <div className={`${styles["details-conrols"]}`}>
-                    <button className={`${styles["details-btn"]} btn`}>
-                        <FontAwesomeIcon icon={faCartPlus} /> Add to Cart
-                    </button>
+                    {cart.cartItems.filter(item => item.item._id === product._id).length === 0 ? 
+                        <button className={`${styles["details-btn"]} btn`} onClick={() => dispatcher(addToCart({item: product, count: 1}))}>
+                            <FontAwesomeIcon icon={faCartPlus} /> Add to Cart
+                        </button>
+                        :
+                        <ProductCounter item={product} className='my-0' />
+                }
                     <button className={`${styles["details-btn"]} btn`}>
                         <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
                     </button>
