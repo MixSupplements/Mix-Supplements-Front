@@ -28,7 +28,7 @@ const Cart = () => {
         <div className="text-center">
             <h2>My Cart</h2>
             <div className="cart-content row pt-5">
-                <div className="cart-items text-start col-md-9">
+                <div className="cart-items text-start col-md-9 mb-3">
                     { showItems }
                     <button className="btn home-button" disabled={emptyCart}>Proceed  To Checkout</button>
                 </div>

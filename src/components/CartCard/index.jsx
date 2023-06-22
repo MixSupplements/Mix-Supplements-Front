@@ -15,10 +15,10 @@ const CartCard = ({item}) => {
             <div className='col-5 text-center d-flex flex-column justify-content-center'>
                 <span>{item.name}</span>
             </div>
-            <div className='col-2 text-center d-flex flex-column justify-content-center'>
+            <div className='col-lg-2 col-3 text-center d-flex flex-column justify-content-center'>
                 <ProductCounter key={item._id} item={item} />
             </div>
-            <div className='col-2 text-center d-flex flex-column justify-content-center'>
+            <div className='col-lg-2 col-1 text-center d-flex flex-column justify-content-center'>
                 <span>{item.price} L.E</span>
             </div>
             <div className='col-1 text-start d-flex flex-column justify-content-center'>
