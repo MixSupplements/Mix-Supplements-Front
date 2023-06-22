@@ -12,9 +12,9 @@ import "../styles/userProfile/userProfile.css";
 const UserProfile = () => {
     const nagivator = useNavigate();
 
-    useEffect(() => {
-        nagivator("/user/accountDetails");
-    }, []);
+    // useEffect(() => {
+    //     nagivator("/user/accountDetails");
+    // }, []);
 
     return (
         <Tab.Container id="tabs" defaultActiveKey="accountDetails">
