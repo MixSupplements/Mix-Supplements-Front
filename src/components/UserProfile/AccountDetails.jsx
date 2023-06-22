@@ -17,9 +17,9 @@ const AccountDetails = () => {
         name: "hamda kawetsh",
         email: "kawetsh@example.com",
         addresses: [
-            { city: "cairo", street: "main st", building: "shrouk building" },
-            { city: "alex", street: "gaafer st", building: "fun building" },
-            { city: "mans", street: "nasr st", building: "karezma building" },
+            // { governorate: "cairo", city: "shrouk", street: "main st" },
+            // { governorate: "alex", city: "fun", street: "gaafer st" },
+            // { governorate: "mans", city: "mans", street: "nasr st" },
         ],
         phoneNumbers: ["123-456-7890", "987-654-3210", "325-433-4343"],
     });
@@ -39,12 +39,18 @@ const AccountDetails = () => {
     const handleSave = (e) => {
         if (
             !newDetails.name.trim() ||
-            newDetails.addresses.every(({ city }) => !city.trim()) ||
+            newDetails.addresses.every(
+                ({ governorate, city, street }) =>
+                    !governorate.trim() || !city.trim() || !street.trim()
+            ) ||
             newDetails.phoneNumbers.every((phone) => !phone.trim())
         ) {
             e.preventDefault();
         } else {
-            const addresses = newDetails.addresses.filter((address) => address.city.trim());
+            const addresses = newDetails.addresses.filter(
+                (address) =>
+                    address.governorate.trim() && address.city.trim() && address.street.trim()
+            );
             const phoneNumbers = newDetails.phoneNumbers.filter((phoneNumber) =>
                 phoneNumber.trim()
             );
@@ -83,9 +89,10 @@ const AccountDetails = () => {
     };
 
     const handleAddAddress = () => {
+        if (isEditing == false) setIsEditing(true);
         setNewDetails({
             ...newDetails,
-            addresses: [...newDetails.addresses, { city: "", street: "", building: "" }],
+            addresses: [...newDetails.addresses, { city: "", street: "", governorate: "" }],
         });
     };
 
@@ -138,7 +145,7 @@ const AccountDetails = () => {
             <div style={{ marginBottom: "var(--size-500)" }}>
                 <div className="d-flex justify-content-between align-items-center">
                     <h4 className={styles["field-title"]}>Addresses</h4>
-                    {isEditing ? (
+                    {isEditing || newDetails.addresses.length == 0 ? (
                         <div
                             className={`btn ${styles["profile-btn"]} ${styles["flex-btn"]} ${styles["add-btn"]}`}
                             onClick={handleAddAddress}
@@ -155,6 +162,24 @@ const AccountDetails = () => {
                                 return (
                                     <div key={index} className={`${styles["inner-field"]}`}>
                                         <div className="d-flex gap-3 align-items-center">
+                                            <div className="form-group">
+                                                <label htmlFor="governorate" className="ms-1">
+                                                    Governorate:
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className={`form-control ${
+                                                        addresses.length == 1 &&
+                                                        !address.governorate.trim()
+                                                            ? styles["error-input"]
+                                                            : styles["profile-input"]
+                                                    }`}
+                                                    value={address.governorate}
+                                                    onChange={(e) =>
+                                                        handleAddressChange(e, "governorate", index)
+                                                    }
+                                                />
+                                            </div>
                                             <div className="form-group">
                                                 <label htmlFor="city" className="ms-1">
                                                     City:
@@ -179,30 +204,21 @@ const AccountDetails = () => {
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    className={`form-control ${styles["profile-input"]}`}
+                                                    className={`form-control ${
+                                                        addresses.length == 1 &&
+                                                        !address.street.trim()
+                                                            ? styles["error-input"]
+                                                            : styles["profile-input"]
+                                                    }`}
                                                     value={address.street}
                                                     onChange={(e) =>
                                                         handleAddressChange(e, "street", index)
                                                     }
                                                 />
                                             </div>
-                                            <div className="form-group">
-                                                <label htmlFor="building" className="ms-1">
-                                                    Building:
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${styles["profile-input"]}`}
-                                                    value={address.building}
-                                                    onChange={(e) =>
-                                                        handleAddressChange(e, "building", index)
-                                                    }
-                                                />
-                                            </div>
                                             {addresses.length > 1 ? (
                                                 <FontAwesomeIcon
                                                     icon={faTrashCan}
-                                                    size=""
                                                     className="btn btn-outline-danger mt-4"
                                                     onClick={() => handleAddressDelete(index)}
                                                 />
@@ -216,7 +232,7 @@ const AccountDetails = () => {
                         <>
                             {userDetails.addresses.map((address, index) => (
                                 <div key={index} className={`${styles["inner-field"]}`}>
-                                    <span>{`${address.city}, ${address.street}, ${address.building}`}</span>
+                                    <span>{`${address.governorate}, ${address.city}, ${address.street}`}</span>
                                 </div>
                             ))}
                         </>
