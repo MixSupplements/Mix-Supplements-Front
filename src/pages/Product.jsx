@@ -16,6 +16,7 @@ const Product = () => {
   },[]);
   
   const [productItem, setProductItem] = useState({
+    _id: 1,
     images: [],
     details:{},
     description: ''

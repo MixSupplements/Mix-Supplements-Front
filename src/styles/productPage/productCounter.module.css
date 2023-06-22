@@ -1,7 +1,7 @@
 .counter {
     display: flex;
     align-items: center;
-    margin-block: var(--size-500);
+    /* margin-block: var(--size-500); */
     gap: var(--size-400);
 }
 
