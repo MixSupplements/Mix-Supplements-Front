@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const init = {
+const localCart = JSON.parse(localStorage.getItem('cart'));
+
+const init = localCart ? localCart :{
     count: 0,
     totalPrice: 0,
     cartItems: []
@@ -13,6 +15,7 @@ const cartSlice = createSlice({
             state.count += action.payload.count;
             state.totalPrice += action.payload.item.price * action.payload.count;
             state.cartItems.push({item: action.payload.item, count: action.payload.count});
+            localStorage.setItem('cart', JSON.stringify(state));
         },
         removeFromCart: (state, action) => {
             const index = state.cartItems.findIndex(item => item.item._id === action.payload.item._id);
@@ -21,6 +24,7 @@ const cartSlice = createSlice({
             if(index !== -1){
                 state.cartItems.splice(index, 1);
             }
+            localStorage.setItem('cart', JSON.stringify(state));
         },
         increaseCountByOne: (state, action) => {
             state.count += 1;
@@ -29,6 +33,7 @@ const cartSlice = createSlice({
                 state.cartItems[index].count += 1;
             }
             state.totalPrice += action.payload.item.price;
+            localStorage.setItem('cart', JSON.stringify(state));
         },
         decreaseCountByOne: (state, action) => {
             state.count -= 1;
@@ -43,6 +48,7 @@ const cartSlice = createSlice({
                 }
             }
             state.totalPrice -= action.payload.item.price;
+            localStorage.setItem('cart', JSON.stringify(state));
         }
     }
 })
