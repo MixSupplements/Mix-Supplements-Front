@@ -55,13 +55,13 @@ const ProductCard = ({ product }) => {
                 onClick={toggleCart}
                 className={`${
                   isInCart ? "fa-cart-shopping filled" : "fa-cart-plus"
-                } fa-solid  col-4 p-0 text-end`}
+                } fa-solid  col-4 p-0 text-end cart-btn`}
               ></i>
               <i
                 onClick={() => {}}
                 className={`${
                   fillHeart() ? "fa-solid filled" : "fa-regular"
-                } fa-heart col-4 p-0 text-start`}
+                } fa-heart col-4 p-0 text-start wishlist-btn`}
               ></i>
             </div>
           </div>
