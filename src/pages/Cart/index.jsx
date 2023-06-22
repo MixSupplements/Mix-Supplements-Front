@@ -37,11 +37,11 @@ const Cart = () => {
                         <h5><i className="fa-solid fa-bag-shopping"></i> Order Total</h5>
                         <div className="row py-3">
                             <span className="col-6">Total Items:</span>
-                            <span className="col-6 text-end">5</span>
+                            <span className="col-6 text-end">{ cart.count }</span>
                         </div>
                         <div className="row py-3">
                             <span className="col-6">Total Price:</span>
-                            <span className="col-6 text-end">5200 L.E</span>
+                            <span className="col-6 text-end">{ cart.totalPrice } L.E</span>
                         </div>
                     </div>
                 </div>
