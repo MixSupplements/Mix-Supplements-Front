@@ -33,9 +33,11 @@ const UserOrders = () => {
 
     return (
         <div className={styles["user-orders-container"]}>
-            {orders.map((order) => (
-                <UserOrder key={order.id} order={order} />
-            ))}
+            {orders.length ? (
+                orders.map((order) => <UserOrder key={order.id} order={order} />)
+            ) : (
+                <div className={styles["empty-placeholder"]}>No Orders Found</div>
+            )}
         </div>
     );
 };
