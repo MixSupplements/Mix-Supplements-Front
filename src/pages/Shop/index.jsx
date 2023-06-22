@@ -114,7 +114,7 @@ const Shop = () => {
             </h2>
             <div
               id="collapseTwo"
-              className="accordion-collapse collapse show"
+              className="accordion-collapse collapse"
               aria-labelledby="headingTwo"
               data-bs-parent="#accordionExample"
             >
@@ -193,7 +193,7 @@ const Shop = () => {
             </h2>
             <div
               id="collapseThree"
-              className="accordion-collapse collapse show"
+              className="accordion-collapse collapse"
               aria-labelledby="headingThree"
               data-bs-parent="#accordionExample"
             >
@@ -263,13 +263,7 @@ const Shop = () => {
           return (
             <ProductCard
             key={product._id}
-            id={product._id}
-            img={product.images[0]? product.images[0].imageUrl : process.env.PUBLIC_URL + 'images/512x512.png'}
-            rating={product.rating}
-            name={product.name}
-            price={product.price}
-            cart={false}
-            wish={false}
+            product={product}
           />
           )
         })}

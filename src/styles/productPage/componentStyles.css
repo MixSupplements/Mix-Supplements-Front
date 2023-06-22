@@ -1,5 +1,6 @@
 .productPage-carousel {
     position: relative;
+    min-height: 33rem;
 }
 
 .productPage-carousel img,
@@ -25,4 +26,8 @@
     background-color: #fff;
     opacity: 1;
     border-radius: 50%;
+}
+
+.list-group{
+    min-height: 22rem;
 }
