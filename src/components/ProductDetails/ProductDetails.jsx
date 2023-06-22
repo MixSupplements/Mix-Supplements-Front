@@ -82,17 +82,21 @@ const ProductDetails = ({ product }) => {
                     })}
                 </div>
                 
-                <div className={`${styles["details-conrols"]}`}>
-                    {cart.cartItems.filter(item => item.item._id === product._id).length === 0 ? 
-                        <button className={`${styles["details-btn"]} btn`} onClick={() => dispatcher(addToCart({item: product, count: 1}))}>
-                            <FontAwesomeIcon icon={faCartPlus} /> Add to Cart
+                <div className={`${styles["details-conrols"]} row justify-content-center`}>
+                    <div className="col-5">
+                        {cart.cartItems.filter(item => item.item._id === product._id).length === 0 ? 
+                            <button className={`${styles["details-btn"]} btn`} onClick={() => dispatcher(addToCart({item: product, count: 1}))}>
+                                <FontAwesomeIcon icon={faCartPlus} /> Add to Cart
+                            </button>
+                            :
+                            <ProductCounter item={product} className='my-0' />
+                        }
+                    </div>
+                    <div className="col-5 text-center">
+                        <button className={`${styles["details-btn"]} btn`}>
+                            <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
                         </button>
-                        :
-                        <ProductCounter item={product} className='my-0' />
-                }
-                    <button className={`${styles["details-btn"]} btn`}>
-                        <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
