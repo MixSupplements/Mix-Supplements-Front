@@ -3,6 +3,7 @@ import CartCard from "../../components/CartCard";
 import { useSelector } from "react-redux";
 
 import styles from "../../styles/userProfile/userWishlist.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     useEffect(() => {
@@ -24,13 +25,23 @@ const Cart = () => {
         })
     }
 
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const proceedToCheckout = () => {
+        if(token){
+            navigate(`/order`);
+        } else {
+            navigate(`/login`);
+        }
+    }
+
     return ( 
         <div className="text-center">
             <h2>My Cart</h2>
             <div className="cart-content row pt-5">
                 <div className="cart-items text-start col-md-9 mb-3">
                     { showItems }
-                    <button className="btn home-button" disabled={emptyCart}>Proceed  To Checkout</button>
+                    <button className="btn home-button" onClick={() => {proceedToCheckout()}} disabled={emptyCart}>Proceed  To Checkout</button>
                 </div>
                 <div className="cart-total  col-md-3">
                     <div className="border border-white p-3 text-start rounded-2">
