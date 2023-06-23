@@ -3,6 +3,7 @@ import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../redux/slices/cart";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -22,9 +23,16 @@ const ProductCard = ({ product }) => {
     }
   }
 
-  const fillHeart = () => {
-    return false;
-  };
+  const wishlist = useSelector(store => store.wishlist);
+  const isInWishlist = wishlist.wishlistItems.some(item => item._id === product._id);
+  const toggleWishlist = (e) => {
+    e.stopPropagation();
+    if(isInWishlist){
+      dispatcher(removeFromWishlist(product));
+    }else{
+      dispatcher(addToWishlist(product));
+    }
+  }
   return (
     <div className="col-5 col-md-4 col-lg-3 p-2">
         <div className="card product-card" onClick={goToDetails}>
@@ -58,9 +66,9 @@ const ProductCard = ({ product }) => {
                 } fa-solid  col-4 p-0 text-end cart-btn`}
               ></i>
               <i
-                onClick={() => {}}
+                onClick={toggleWishlist}
                 className={`${
-                  fillHeart() ? "fa-solid filled" : "fa-regular"
+                  isInWishlist ? "fa-solid filled" : "fa-regular"
                 } fa-heart col-4 p-0 text-start wishlist-btn`}
               ></i>
             </div>
