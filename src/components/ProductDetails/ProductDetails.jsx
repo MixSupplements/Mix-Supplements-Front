@@ -10,6 +10,7 @@ import { faHeart, faCartPlus, faMagnifyingGlassPlus } from "@fortawesome/free-so
 import styles from "../../styles/productPage/productDetails.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/slices/cart";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
 
 const ProductDetails = ({ product }) => {
     const [zoomIn, setZoomIn] = useState(false);
@@ -21,6 +22,16 @@ const ProductDetails = ({ product }) => {
 
     const dispatcher = useDispatch();
     const cart = useSelector(store => store.cart);
+    const wishlist = useSelector(store => store.wishlist);
+    const isInWishlist = wishlist.wishlistItems.some(item => item._id === product._id);
+    const toggleWishlist = (e) => {
+      e.stopPropagation();
+      if(isInWishlist){
+        dispatcher(removeFromWishlist(product));
+      }else{
+        dispatcher(addToWishlist(product));
+      }
+    }
 
     return (
         <div className={`row gap-3 ${styles["details-card"]}`}>
@@ -93,8 +104,8 @@ const ProductDetails = ({ product }) => {
                         }
                     </div>
                     <div className="col-5 text-center">
-                        <button className={`${styles["details-btn"]} btn`}>
-                            <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
+                        <button className={`${styles["details-btn"]} btn`} onClick={toggleWishlist}>
+                            <FontAwesomeIcon icon={faHeart} /> {wishlist.wishlistItems.filter(item => item._id === product._id).length === 0 ? 'Add to Wishlist' : 'Remove Wishlist'}
                         </button>
                     </div>
                 </div>
