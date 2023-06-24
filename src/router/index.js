@@ -1,9 +1,9 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import PrimaryLayout from "../layouts/PrimaryLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
-import Signup from "../pages/Sign-up";
+import Signup from "../pages/Signup/Sign-up";
 import Shop from "../pages/Shop";
 import Product from "../pages/Product";
 import UserProfile from "../pages/UserProfile";
@@ -11,6 +11,7 @@ import AccountDetails from "../components/UserProfile/AccountDetails";
 import UserWishlist from "../components/UserProfile/UserWishlist";
 import UserOrders from "../components/UserProfile/UserOrders";
 import Cart from "../pages/Cart";
+import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
     return (
@@ -27,7 +28,7 @@ const AppRouter = () => {
                     <Route path="wishlist/" element={<UserWishlist />} />
                     <Route path="orders/" element={<UserOrders />} />
                 </Route>
-                <Route path="*" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>
     );
