@@ -12,6 +12,7 @@ function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rememberMe, setRememberMe] = useState();
+  const [invalid, setInvalid] = useState();
   const signinSubmit = function (e) {
     e.preventDefault();
     axiosInstance
@@ -24,7 +25,7 @@ function Login() {
         localStorage.setItem("token", res.data.token);
         navigate(`/home`);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setInvalid(true));
   };
   return (
     <div className="login template d-flex justify-content-center align-items-center">
@@ -93,6 +94,25 @@ function Login() {
               Sign Up
             </Link>
           </p>
+          {invalid ? (
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              Invalid email or password!
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                onClick={() => {
+                  setInvalid(false);
+                }}
+              ></button>
+            </div>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     </div>
