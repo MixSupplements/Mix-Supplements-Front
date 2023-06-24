@@ -12,6 +12,7 @@ import AccountDetails from "../components/UserProfile/AccountDetails";
 import UserWishlist from "../components/UserProfile/UserWishlist";
 import UserOrders from "../components/UserProfile/UserOrders";
 import Cart from "../pages/Cart";
+import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -32,7 +33,7 @@ const AppRouter = () => {
           <Route path="wishlist/" element={<UserWishlist />} />
           <Route path="orders/" element={<UserOrders />} />
         </Route>
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
