@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import PrimaryLayout from "../layouts/PrimaryLayout";
@@ -14,24 +15,28 @@ import Cart from "../pages/Cart";
 import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
-    return (
-        <Routes>
-            <Route element={<PrimaryLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/signup" element={<Signup />}></Route>
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/shop/product/:id" element={<Product />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/user/*" element={<UserProfile />} >
-                    <Route path="accountDetails/" element={<AccountDetails />} />
-                    <Route path="wishlist/" element={<UserWishlist />} />
-                    <Route path="orders/" element={<UserOrders />} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-            </Route>
-        </Routes>
-    );
-}
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, [localStorage.getItem("token")]);
+  return (
+    <Routes>
+      <Route element={<PrimaryLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={token ? <Home /> : <Login />}></Route>
+        <Route path="/signup" element={token ? <Home /> : <Signup />}></Route>
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/product/:id" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/user/*" element={<UserProfile />}>
+          <Route path="accountDetails/" element={<AccountDetails />} />
+          <Route path="wishlist/" element={<UserWishlist />} />
+          <Route path="orders/" element={<UserOrders />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default AppRouter;

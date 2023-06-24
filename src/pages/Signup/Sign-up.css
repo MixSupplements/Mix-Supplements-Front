@@ -46,11 +46,8 @@
   text-decoration: none;
 }
 
-.signup .info {
-  text-transform: capitalize;
-}
-
 .signup .in-btn {
   background-color: var(--clr-primary-400) !important;
+  color: var(--clr-neutral-900);
   border: none;
 }

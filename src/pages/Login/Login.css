@@ -46,10 +46,9 @@
   text-decoration: none;
 }
 
-.login .info {
-  text-transform: capitalize;
-}
-
 .login .in-btn {
   background-color: var(--clr-primary-400) !important;
+}
+.login .custom-input-label {
+  color: var(--clr-neutral-100) !important;
 }
