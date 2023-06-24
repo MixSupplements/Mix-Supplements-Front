@@ -50,6 +50,6 @@ header .cart-badge {
   padding: 0 2px;
   margin-left: 1px;
 }
-/* nav .active {
-
-} */
+nav .active {
+  color: var(--clr-primary-400) !important;
+}
