@@ -105,7 +105,7 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="dropdown-item" to="/wishlist">
+                    <NavLink className="dropdown-item" to="/user/wishlist">
                       My Wishlist
                     </NavLink>
                   </li>
@@ -113,6 +113,7 @@ const Navbar = () => {
                     <li>
                       <NavLink
                         className="dropdown-item"
+                        to="/signout"
                         onClick={() => {
                           signoutSubmit();
                         }}
