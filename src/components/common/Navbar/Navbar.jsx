@@ -35,6 +35,8 @@ const Navbar = () => {
   const searchSubmit = function (e) {
     e.preventDefault();
     navigate(`/search/${searchText}`);
+    e.target.querySelector("input").value = "";
+    e.target.querySelector("input").blur();
   };
   return (
     <>
