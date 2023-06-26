@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axiosInstance from "../../APIs/config";
 
 const localCart = JSON.parse(localStorage.getItem('cart'));
 
@@ -12,12 +13,18 @@ const cartSlice = createSlice({
     initialState: init,
     reducers: {
         addToCart: (state, action) => {
+            if(localStorage.getItem('token')){
+                axiosInstance.post(`/cart/${action.payload.item._id}`)
+            }
             state.count += action.payload.count;
             state.totalPrice += action.payload.item.price * action.payload.count;
             state.cartItems.push({item: action.payload.item, count: action.payload.count});
             localStorage.setItem('cart', JSON.stringify(state));
         },
         removeFromCart: (state, action) => {
+            if(localStorage.getItem('token')){
+                axiosInstance.delete(`/cart/${action.payload.item._id}`)
+            }
             const index = state.cartItems.findIndex(item => item.item._id === action.payload.item._id);
             state.count -= state.cartItems[index].count;
             state.totalPrice -= action.payload.item.price * state.cartItems[index].count;
@@ -27,6 +34,9 @@ const cartSlice = createSlice({
             localStorage.setItem('cart', JSON.stringify(state));
         },
         increaseCountByOne: (state, action) => {
+            if(localStorage.getItem('token')){
+                axiosInstance.post(`/cart/${action.payload.item._id}`)
+            }
             state.count += 1;
             const index = state.cartItems.findIndex(item => item.item._id === action.payload.item._id);
             if(index !== -1){
@@ -36,6 +46,9 @@ const cartSlice = createSlice({
             localStorage.setItem('cart', JSON.stringify(state));
         },
         decreaseCountByOne: (state, action) => {
+            if(localStorage.getItem('token')){
+                axiosInstance.patch(`/cart/${action.payload.item._id}/decrease`)
+            }
             state.count -= 1;
             const index = state.cartItems.findIndex(item => item.item._id === action.payload.item._id);
             if(state.cartItems[index].count === 1){
