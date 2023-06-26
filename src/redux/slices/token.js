@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const tokenSlice = createSlice({
     name: "tokenSlice",
-    initialState: "",
+    initialState: localStorage.getItem("token") || "",
     reducers: {
         setToken: (state, action) => {
             return action.payload;
