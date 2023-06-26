@@ -11,11 +11,12 @@ function Search() {
       .get(`/product/search/${location.pathname.split("/")[2]}`)
       .then((res) => {
         setProducts(res.data);
+        console.log(res);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [location.pathname.split("/")[2]]);
   return (
     <>
       <section className="row justify-content-center pt-4">
