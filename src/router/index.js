@@ -12,6 +12,7 @@ import AccountDetails from "../components/UserProfile/AccountDetails";
 import UserWishlist from "../components/UserProfile/UserWishlist";
 import UserOrders from "../components/UserProfile/UserOrders";
 import Cart from "../pages/Cart";
+import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
@@ -28,10 +29,14 @@ const AppRouter = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/search/:searchText" element={<Search />} />
         <Route path="/user/*" element={<UserProfile />}>
-          <Route path="accountDetails/" element={<AccountDetails />} />
+          <Route
+            path="accountDetails/"
+            element={token ? <AccountDetails /> : <Home />}
+          />
           <Route path="wishlist/" element={<UserWishlist />} />
-          <Route path="orders/" element={<UserOrders />} />
+          <Route path="orders/" element={token ? <UserOrders /> : <Home />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

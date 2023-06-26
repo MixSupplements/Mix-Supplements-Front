@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const cartCounter = useSelector((store) => store.cart.count);
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState();
   const [token, setToken] = useState(localStorage.getItem("token"));
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -31,6 +32,12 @@ const Navbar = () => {
       })
       .catch((error) => console.log(error));
   };
+  const searchSubmit = function (e) {
+    e.preventDefault();
+    navigate(`/search/${searchText}`);
+    e.target.querySelector("input").value = "";
+    e.target.querySelector("input").blur();
+  };
   return (
     <>
       <header className="fixed-top row justify-content-center col-12 pt-2">
@@ -51,7 +58,13 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="col-5 col-sm-7 col-md-8 col-lg-10 mt-2">
-              <form className="d-flex col-12" role="search">
+              <form
+                className="d-flex col-12"
+                role="search"
+                onSubmit={(e) => {
+                  searchSubmit(e);
+                }}
+              >
                 <input
                   id="searchBar"
                   className="form-control col-12"
@@ -59,6 +72,9 @@ const Navbar = () => {
                   placeholder="&#xF002; Search"
                   style={{ fontFamily: "Arial , FontAwesome" }}
                   aria-label="Search"
+                  onChange={(e) => {
+                    setSearchText(e.target.value);
+                  }}
                 />
               </form>
             </div>
