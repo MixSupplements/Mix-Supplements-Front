@@ -2,13 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axiosInstance from "../../APIs/config";
 
-const getWishlist = createAsyncThunk("wishlistSlice/getWishlist", async () => {
+const getWishlist = createAsyncThunk("wishlistSlice/getWishlist", async (_, { getState }) => {
     try {
         let wishlist;
-        if (localStorage.getItem('token')) {
+        const token = getState().token;
+        if (token) {
             const res = await axiosInstance.get('/wishlist', {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             wishlist = { count: res.data.length, wishlistItems: res.data };
