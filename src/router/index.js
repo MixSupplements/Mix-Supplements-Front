@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 import PrimaryLayout from "../layouts/PrimaryLayout";
 import Home from "../pages/Home";
@@ -16,32 +17,27 @@ import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-  }, [localStorage.getItem("token")]);
-  return (
-    <Routes>
-      <Route element={<PrimaryLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={token ? <Home /> : <Login />}></Route>
-        <Route path="/signup" element={token ? <Home /> : <Signup />}></Route>
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/shop/product/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/search/:searchText" element={<Search />} />
-        <Route path="/user/*" element={<UserProfile />}>
-          <Route
-            path="accountDetails/"
-            element={token ? <AccountDetails /> : <Home />}
-          />
-          <Route path="wishlist/" element={<UserWishlist />} />
-          <Route path="orders/" element={token ? <UserOrders /> : <Home />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  );
+    const token = useSelector((store) => store.token);
+    return (
+        <Routes>
+            <Route element={<PrimaryLayout />}>
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={token ? <Navigate to="/home" /> : <Login />}></Route>
+                <Route path="/signup" element={token ? <Navigate to="/home" /> : <Signup />}></Route>
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/shop/product/:id" element={<Product />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/search/:searchText" element={<Search />} />
+                <Route path="/user/*" element={<UserProfile />}>
+                    <Route path="accountDetails/" element={token ? <AccountDetails /> : <Navigate to="/login" />} />
+                    <Route path="wishlist/" element={<UserWishlist />} />
+                    <Route path="orders/" element={token ? <UserOrders /> : <Navigate to="/login" />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
+    );
 };
 
 export default AppRouter;
