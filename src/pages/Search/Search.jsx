@@ -18,10 +18,7 @@ function Search() {
   }, []);
   return (
     <>
-      <section
-        className="row justify-content-center home-section"
-        id="home-products"
-      >
+      <section className="row justify-content-center home-section pt-4">
         {products?.map((product) => {
           return <ProductCard key={product._id} product={product} />;
         })}
