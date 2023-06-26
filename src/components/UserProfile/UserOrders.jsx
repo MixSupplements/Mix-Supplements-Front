@@ -1,10 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 
 import UserOrder from "./UserOrder";
 
 import styles from "../../styles/userProfile/userOrders.module.css";
 
 const UserOrders = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const orders = [
         {
             id: 3267434,

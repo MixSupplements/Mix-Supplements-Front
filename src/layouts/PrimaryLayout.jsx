@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { Container } from "react-bootstrap";
 
 import Navbar from "../components/common/Navbar/Navbar";
 import Footer from "../components/common/Footer/Footer";
+
+import { Container } from "react-bootstrap";
 
 const PrimaryLayout = () => {
     return (
