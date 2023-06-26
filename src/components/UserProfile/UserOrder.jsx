@@ -3,10 +3,11 @@ import React from "react";
 import styles from "../../styles/userProfile/userOder.module.css";
 
 const UserOrder = ({ order }) => {
-    const { id, products, address, deliveryFee, totalPrice } = order;
     const currencyFormat = (price) => {
         return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
     };
+
+    const { id, products, address, deliveryFee, totalPrice } = order;
     return (
         <div className={`${styles["order-container"]}`}>
             <div className="d-flex mb-3">
@@ -18,17 +19,19 @@ const UserOrder = ({ order }) => {
             </div>
             <table className="w-100">
                 <thead className={styles["order-details-head-container"]}>
-                    <th className={styles["order-details-head"]}>Product</th>
-                    <th className={styles["order-details-head"]}>Amount</th>
-                    <th
-                        className={`${styles["order-details-head"]} ${styles["align-right"]}`}
-                        style={{ width: "7rem" }}
-                    >
-                        Price
-                    </th>
+                    <tr>
+                        <th className={styles["order-details-head"]}>Product</th>
+                        <th className={styles["order-details-head"]}>Amount</th>
+                        <th
+                            className={`${styles["order-details-head"]} ${styles["align-right"]}`}
+                            style={{ width: "7rem" }}
+                        >
+                            Price
+                        </th>
+                    </tr>
                 </thead>
                 {products.map((product, index) => (
-                    <tbody key={product.id} className>
+                    <tbody key={product.id}>
                         <tr>
                             <td className={styles["order-details-cell"]}>{product.name}</td>
                             <td className={styles["order-details-cell"]}>x {product.amount}</td>

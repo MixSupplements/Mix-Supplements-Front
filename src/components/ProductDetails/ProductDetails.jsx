@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slices/cart";
+import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
+
 import ProductRate from "./ProductRate";
 import ProductCounter from "./ProductCounter";
 
@@ -8,11 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCartPlus, faMagnifyingGlassPlus } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "../../styles/productPage/productDetails.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/slices/cart";
-import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
 
 const ProductDetails = ({ product }) => {
+    const currencyFormat = (price) => {
+        return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
+    };
+
     const [zoomIn, setZoomIn] = useState(false);
     const [currentImage, setCurrentImage] = useState("");
     const handleMagnifierClick = (imageSrc) => {
@@ -21,24 +26,24 @@ const ProductDetails = ({ product }) => {
     };
 
     const dispatcher = useDispatch();
-    const cart = useSelector(store => store.cart);
-    const wishlist = useSelector(store => store.wishlist);
-    const isInWishlist = wishlist.wishlistItems.some(item => item._id === product._id);
+    const cart = useSelector((store) => store.cart);
+    const wishlist = useSelector((store) => store.wishlist);
+    const isInWishlist = wishlist.wishlistItems.some((item) => item._id === product._id);
     const toggleWishlist = (e) => {
-      e.stopPropagation();
-      if(isInWishlist){
-        dispatcher(removeFromWishlist(product));
-      }else{
-        dispatcher(addToWishlist(product));
-      }
-    }
+        e.stopPropagation();
+        if (isInWishlist) {
+            dispatcher(removeFromWishlist(product));
+        } else {
+            dispatcher(addToWishlist(product));
+        }
+    };
 
     return (
         <div className={`row gap-3 ${styles["details-card"]}`}>
             <div className="col-md-6">
                 <Carousel className="productPage-carousel" pause={false} interval={null}>
                     {product.images.map((image, index) => (
-                        <Carousel.Item key={index}>
+                        <Carousel.Item key={image.publicId}>
                             <img src={image.imageUrl} alt={`${image.imageUrl}`} />
                             <div
                                 className={styles["magnifier"]}
@@ -74,6 +79,7 @@ const ProductDetails = ({ product }) => {
                         ) {
                             return (
                                 <div
+                                    key={key}
                                     className="list-group-item text-white"
                                     style={{ backgroundColor: "#1e1e1e" }}
                                 >
@@ -83,7 +89,9 @@ const ProductDetails = ({ product }) => {
                                             className="col-8"
                                             style={{ fontWeight: "var(--fw-bold)" }}
                                         >
-                                            {value}
+                                            {key === "price"
+                                                ? currencyFormat(value) + " LE"
+                                                : value}
                                         </span>
                                     </div>
                                 </div>
@@ -92,20 +100,28 @@ const ProductDetails = ({ product }) => {
                         return null;
                     })}
                 </div>
-                
+
                 <div className={`${styles["details-conrols"]} row justify-content-center`}>
                     <div className="col-5">
-                        {cart.cartItems.filter(item => item.item._id === product._id).length === 0 ? 
-                            <button className={`${styles["details-btn"]} btn`} onClick={() => dispatcher(addToCart({item: product, count: 1}))}>
+                        {cart.cartItems.filter((item) => item.item._id === product._id).length ===
+                        0 ? (
+                            <button
+                                className={`${styles["details-btn"]} btn`}
+                                onClick={() => dispatcher(addToCart({ item: product, count: 1 }))}
+                            >
                                 <FontAwesomeIcon icon={faCartPlus} /> Add to Cart
                             </button>
-                            :
-                            <ProductCounter item={product} className='my-0' />
-                        }
+                        ) : (
+                            <ProductCounter item={product} className="my-0" />
+                        )}
                     </div>
                     <div className="col-5 text-center">
                         <button className={`${styles["details-btn"]} btn`} onClick={toggleWishlist}>
-                            <FontAwesomeIcon icon={faHeart} /> {wishlist.wishlistItems.filter(item => item._id === product._id).length === 0 ? 'Add to Wishlist' : 'Remove Wishlist'}
+                            <FontAwesomeIcon icon={faHeart} />{" "}
+                            {wishlist.wishlistItems.filter((item) => item._id === product._id)
+                                .length === 0
+                                ? "Add to Wishlist"
+                                : "Remove Wishlist"}
                         </button>
                     </div>
                 </div>
