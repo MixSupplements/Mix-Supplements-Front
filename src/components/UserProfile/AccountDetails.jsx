@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import axiosInstance from "../../APIs/config";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,39 +14,40 @@ import {
 import styles from "../../styles/userProfile/accountDetails.module.css";
 
 const AccountDetails = () => {
+    const [userDetails, setUserDetails] = useState({});
     const [isEditing, setIsEditing] = useState(false);
-    const [userDetails, setUserDetails] = useState({
-        name: "hamda kawetsh",
-        email: "kawetsh@example.com",
-        addresses: [
-            // { governorate: "cairo", city: "shrouk", street: "main st" },
-            // { governorate: "alex", city: "fun", street: "gaafer st" },
-            // { governorate: "mans", city: "mans", street: "nasr st" },
-        ],
-        phoneNumbers: ["123-456-7890", "987-654-3210", "325-433-4343"],
-    });
-    const [newDetails, setNewDetails] = useState({
-        ...userDetails,
-        addresses: userDetails.addresses.map((address) => ({ ...address })),
-    });
+    const [newDetails, setNewDetails] = useState({});
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        axiosInstance
+            .get("/user", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((res) => {
+                setUserDetails(res.data);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
     const handleEdit = () => {
-        setNewDetails({
-            ...userDetails,
-            addresses: userDetails.addresses.map((address) => ({ ...address })),
-        });
+        setNewDetails(JSON.parse(JSON.stringify(userDetails)));
         setIsEditing(true);
     };
 
     const handleSave = (e) => {
         if (
-            !newDetails.name.trim() ||
-            newDetails.addresses.every(
-                ({ governorate, city, street }) =>
-                    !governorate.trim() || !city.trim() || !street.trim()
-            ) ||
+            !newDetails.firstName.trim() ||
+            !newDetails.lastName.trim() ||
+            (newDetails.addresses.length &&
+                newDetails.addresses.every(
+                    ({ governorate, city, street }) =>
+                        !governorate.trim() || !city.trim() || !street.trim()
+                )) ||
             newDetails.phoneNumbers.every((phone) => !phone.trim())
         ) {
+            window.scrollTo(0, 0);
             e.preventDefault();
         } else {
             const addresses = newDetails.addresses.filter(
@@ -54,26 +57,36 @@ const AccountDetails = () => {
             const phoneNumbers = newDetails.phoneNumbers.filter((phoneNumber) =>
                 phoneNumber.trim()
             );
-            setUserDetails({
-                ...newDetails,
-                addresses,
-                phoneNumbers,
-            });
-            setIsEditing(false);
+            axiosInstance
+                .patch(
+                    `/user/${userDetails._id}`,
+                    { ...newDetails, addresses, phoneNumbers },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    }
+                )
+                .then(() => {
+                    setUserDetails({
+                        ...newDetails,
+                        addresses,
+                        phoneNumbers,
+                    });
+                    setIsEditing(false);
+                })
+                .catch((error) => console.log(error));
         }
     };
 
     const handelCancel = () => {
-        setNewDetails({
-            ...userDetails,
-            addresses: userDetails.addresses.map((address) => ({ ...address })),
-        });
+        setNewDetails(JSON.parse(JSON.stringify(userDetails)));
         setIsEditing(false);
     };
 
-    const handleNameChange = (e) => {
+    const handleNameChange = (e, field) => {
         const { value } = e.target;
-        setNewDetails({ ...newDetails, name: value });
+        setNewDetails({ ...newDetails, [field]: value });
     };
 
     const handleAddressChange = (e, field, index) => {
@@ -104,12 +117,12 @@ const AccountDetails = () => {
     };
 
     const handleAddressDelete = (index) => {
-        const addresses = newDetails.addresses.filter((address, i) => i !== index);
+        const addresses = newDetails.addresses.filter((_, i) => i !== index);
         setNewDetails({ ...newDetails, addresses });
     };
 
     const handlePhoneDelete = (index) => {
-        const phoneNumbers = newDetails.phoneNumbers.filter((phone, i) => i !== index);
+        const phoneNumbers = newDetails.phoneNumbers.filter((_, i) => i !== index);
         setNewDetails({ ...newDetails, phoneNumbers });
     };
 
@@ -117,24 +130,52 @@ const AccountDetails = () => {
         <div>
             <div style={{ marginBottom: "var(--size-500)" }}>
                 <h4 className={styles["field-title"]}>Name</h4>
-                {isEditing ? (
-                    <>
-                        <input
-                            type="text"
-                            className={`form-control ${
-                                newDetails.name.trim()
-                                    ? styles["profile-input"]
-                                    : styles["error-input"]
-                            }`}
-                            value={newDetails.name}
-                            onChange={handleNameChange}
-                        />
-                    </>
-                ) : (
-                    <div className={`${styles["main-field"]} ${styles["inner-field"]}`}>
-                        <span>{userDetails.name}</span>
-                    </div>
-                )}
+                <div className={styles["main-field"]}>
+                    {isEditing ? (
+                        <>
+                            {
+                                <div className={`${styles["inner-field"]}`}>
+                                    <div className="d-flex gap-3 align-items-center">
+                                        <div className="form-group">
+                                            <label htmlFor="firstName" className="ms-1">
+                                                First Name:
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${
+                                                    !newDetails.firstName.trim()
+                                                        ? styles["error-input"]
+                                                        : styles["profile-input"]
+                                                }`}
+                                                value={newDetails.firstName}
+                                                onChange={(e) => handleNameChange(e, "firstName")}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="lastName" className="ms-1">
+                                                Last Name:
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className={`form-control ${
+                                                    !newDetails.lastName.trim()
+                                                        ? styles["error-input"]
+                                                        : styles["profile-input"]
+                                                }`}
+                                                value={newDetails.lastName}
+                                                onChange={(e) => handleNameChange(e, "lastName")}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </>
+                    ) : (
+                        <div className={`${styles["main-field"]} ${styles["inner-field"]}`}>
+                            <span>{`${userDetails.firstName} ${userDetails.lastName}`}</span>
+                        </div>
+                    )}
+                </div>
             </div>
             <div style={{ marginBottom: "var(--size-500)" }}>
                 <h4 className={styles["field-title"]}>Email</h4>
@@ -145,7 +186,7 @@ const AccountDetails = () => {
             <div style={{ marginBottom: "var(--size-500)" }}>
                 <div className="d-flex justify-content-between align-items-center">
                     <h4 className={styles["field-title"]}>Addresses</h4>
-                    {isEditing || newDetails.addresses.length == 0 ? (
+                    {isEditing || newDetails.addresses?.length == 0 ? (
                         <div
                             className={`btn ${styles["profile-btn"]} ${styles["flex-btn"]} ${styles["add-btn"]}`}
                             onClick={handleAddAddress}
@@ -158,7 +199,7 @@ const AccountDetails = () => {
                 <div className={styles["main-field"]}>
                     {isEditing ? (
                         <>
-                            {newDetails.addresses.map((address, index, addresses) => {
+                            {newDetails.addresses?.map((address, index, addresses) => {
                                 return (
                                     <div key={index} className={`${styles["inner-field"]}`}>
                                         <div className="d-flex gap-3 align-items-center">
@@ -230,7 +271,7 @@ const AccountDetails = () => {
                         </>
                     ) : (
                         <>
-                            {userDetails.addresses.map((address, index) => (
+                            {userDetails.addresses?.map((address, index) => (
                                 <div key={index} className={`${styles["inner-field"]}`}>
                                     <span>{`${address.governorate}, ${address.city}, ${address.street}`}</span>
                                 </div>
@@ -255,7 +296,7 @@ const AccountDetails = () => {
                 <div className={styles["main-field"]}>
                     {isEditing ? (
                         <>
-                            {newDetails.phoneNumbers.map((phoneNumber, index, phoneNumbers) => {
+                            {newDetails.phoneNumbers?.map((phoneNumber, index, phoneNumbers) => {
                                 return (
                                     <div key={index} className={`${styles["inner-field"]}`}>
                                         <div className="d-flex gap-3 align-items-center">
@@ -287,7 +328,7 @@ const AccountDetails = () => {
                         </>
                     ) : (
                         <>
-                            {userDetails.phoneNumbers.map((phoneNumber, index) => (
+                            {userDetails.phoneNumbers?.map((phoneNumber, index) => (
                                 <div key={index} className={`${styles["inner-field"]}`}>
                                     <span>{phoneNumber}</span>
                                 </div>

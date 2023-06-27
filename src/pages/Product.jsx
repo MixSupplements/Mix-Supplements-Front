@@ -1,42 +1,42 @@
 import { useEffect, useState } from "react";
 
-import { Container } from "react-bootstrap";
+import axiosInstance from "../APIs/config";
+import { useParams } from "react-router-dom";
 
 import ProductDetails from "../components/ProductDetails/ProductDetails";
 import ProductDescription from "../components/ProductDetails/ProductDescription";
 import ProductReview from "../components/ProductDetails/ProductReview";
 
+import { Container } from "react-bootstrap";
 import "../styles/productPage/componentStyles.css";
-import axiosInstance from "../APIs/config";
-import { useParams } from "react-router-dom";
 
 const Product = () => {
-  useEffect(() => {
-    window.scrollTo(0,0);
-  },[]);
-  
-  const [productItem, setProductItem] = useState({
-    _id: 1,
-    images: [],
-    details:{},
-    description: ''
-  });
-  const params = useParams();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
-  useEffect(() => {
-    axiosInstance
-      .get(`/product/${params.id}`)
-      .then((res) => setProductItem(res.data))
-      .catch((err) => console.log(err));
-  },[params.id]);
+    const [productItem, setProductItem] = useState({
+        _id: 1,
+        images: [],
+        details: {},
+        description: "",
+    });
+    const params = useParams();
 
-  return (
-    <Container style={{ marginBlock: `var(--size-700)` }}>
-      <ProductDetails product={productItem} />
-      <ProductDescription product={productItem} />
-      <ProductReview product={productItem} />
-    </Container>
-  );
+    useEffect(() => {
+        axiosInstance
+            .get(`/product/${params.id}`)
+            .then((res) => setProductItem(res.data))
+            .catch((err) => console.log(err));
+    }, [params.id]);
+
+    return (
+        <Container style={{ marginBlock: `var(--size-700)` }}>
+            <ProductDetails product={productItem} />
+            <ProductDescription product={productItem} />
+            <ProductReview product={productItem} />
+        </Container>
+    );
 };
 
 export default Product;
