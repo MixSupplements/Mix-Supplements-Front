@@ -3,18 +3,18 @@ import axiosInstance from "../../APIs/config";
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 
-const getCart = createAsyncThunk("cartSlice/getCart",async (_, { getState }) => {
+const getCart = createAsyncThunk("cartSlice/getCart",async () => {
     try {
         let cart;
-        const token = getState().token;
+        const token = localStorage.getItem('token');
         if(token) {
             const res = await axiosInstance.get('/cart')
-            // ! important not done yet
-            let totalPrice;
-            res.data.map(item => totalPrice += item.product.price * item.quantity);
-            let count;
-            res.data.map(item => count += item.quantity)
-            cart = { count: count, totalPrice:totalPrice, cartItems: res.data }
+            // ! database cart overwrites local cart
+            let totalPrice = 0;
+            res.data.cart.map(item => totalPrice +=  Number(item.product.price) * Number(item.quantity));
+            let count = 0;
+            res.data.cart.map(item => count += Number(item.quantity))
+            cart = { count: count, totalPrice:totalPrice, cartItems: res.data.cart }
             localStorage.setItem('cart', JSON.stringify(cart));
         }
         else {
@@ -84,6 +84,11 @@ const cartSlice = createSlice({
             }
             state.totalPrice -= action.payload.item.price;
             localStorage.setItem('cart', JSON.stringify(state));
+        },
+        reset: (state, action) => {
+            state.count = 0;
+            state.totalPrice = 0;
+            state.cartItems = [];
         }
     },
     extraReducers: (builder) => {
@@ -93,6 +98,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const {addToCart, removeFromCart, increaseCountByOne, decreaseCountByOne} = cartSlice.actions;
+export const {addToCart, removeFromCart, increaseCountByOne, decreaseCountByOne, reset} = cartSlice.actions;
 export {getCart};
 export default cartSlice.reducer;
