@@ -11,6 +11,7 @@ import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./Navbar.css";
 import logo from "../../../assets/images/logo.png";
+import { reset } from "../../../redux/slices/cart";
 
 const Navbar = () => {
     const cartCounter = useSelector((store) => store.cart.count);
@@ -32,7 +33,9 @@ const Navbar = () => {
             )
             .then((res) => {
                 localStorage.removeItem("token");
+                localStorage.removeItem("cart");
                 dispatch(setToken(""));
+                dispatch(reset());
                 navigate(`/login`);
             })
             .catch((error) => console.log(error));
