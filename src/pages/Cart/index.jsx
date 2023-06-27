@@ -24,7 +24,7 @@ const Cart = () => {
     } else {
         emptyCart = false;
         cart.cartItems.map((item) => {
-            return showItems.push(<CartCard key={item.item._id} item={item.item} />);
+            return showItems.push(<CartCard key={item.product._id} item={item.product} />);
         });
     }
 
