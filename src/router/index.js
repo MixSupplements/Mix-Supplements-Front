@@ -30,7 +30,7 @@ const AppRouter = () => {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/product/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={token && cart.cartItems.length !==0? <Checkout />: <Navigate to="/shop"/>} />
+                <Route path="/checkout" element={token && cart.cartItems.length !==0? <Checkout />: <Shop />} />
                 <Route path="/search/:searchText" element={<Search />} />
                 <Route path="/user/*" element={<UserProfile />}>
                     <Route path="accountDetails/" element={token ? <AccountDetails /> : <Navigate to="/login" />} />
