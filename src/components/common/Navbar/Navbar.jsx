@@ -11,6 +11,7 @@ import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./Navbar.css";
 import logo from "../../../assets/images/logo.png";
+import { resetCart } from "../../../redux/slices/cart";
 
 const Navbar = () => {
     const cartCounter = useSelector((store) => store.cart.count);
@@ -32,7 +33,10 @@ const Navbar = () => {
             )
             .then((res) => {
                 localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
                 dispatch(setToken(""));
+                dispatch(resetCart());
                 navigate(`/login`);
             })
             .catch((error) => console.log(error));
@@ -129,7 +133,7 @@ const Navbar = () => {
                                         <li>
                                             <NavLink
                                                 className="dropdown-item"
-                                                to="/signout"
+                                                to="/login"
                                                 onClick={() => {
                                                     signoutSubmit();
                                                 }}

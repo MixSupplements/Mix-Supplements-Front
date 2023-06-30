@@ -103,7 +103,7 @@ const ProductDetails = ({ product }) => {
 
                 <div className={`${styles["details-conrols"]} row justify-content-center`}>
                     <div className="col-5">
-                        {cart.cartItems.filter((item) => item.item._id === product._id).length ===
+                        {cart.cartItems.filter((item) => item.product._id === product._id).length ===
                         0 ? (
                             <button
                                 className={`${styles["details-btn"]} btn`}

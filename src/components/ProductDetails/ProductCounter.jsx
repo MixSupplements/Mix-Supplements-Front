@@ -13,16 +13,11 @@ const ProductCounter = ({ item }) => {
 
     const dispatcher = useDispatch();
     const cart = useSelector((store) => store.cart);
-    console.log(
-        cart.cartItems,
-        item,
-        cart.cartItems.filter((product) => product.item._id === item._id)
-    );
     let [itemCount, setItemCount] = useState(1);
     useEffect(() => {
         if (cart.cartItems.length !== 0) {
             setItemCount(
-                cart.cartItems.filter((product) => product.item._id === item._id)[0]?.count
+                cart.cartItems.filter((product) => product.product._id === item._id)[0]?.quantity
             );
         }
     }, [cart.cartItems, item._id]);

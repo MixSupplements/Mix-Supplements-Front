@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
 
     const dispatcher = useDispatch();
     const cart = useSelector((store) => store.cart);
-    const isInCart = cart.cartItems.some((item) => item.item._id === product._id);
+    const isInCart = cart.cartItems.some((item) => item.product._id === product._id);
     const toggleCart = (e) => {
         e.stopPropagation();
         if (isInCart) {
