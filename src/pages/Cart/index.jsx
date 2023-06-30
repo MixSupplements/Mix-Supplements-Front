@@ -32,7 +32,7 @@ const Cart = () => {
     const token = useSelector((store) => store.token);
     const proceedToCheckout = () => {
         if (token) {
-            navigate(`/user/orders`);
+            navigate(`/checkout`);
         } else {
             navigate(`/login`);
         }
