@@ -3,19 +3,25 @@ import axiosInstance from "../../APIs/config";
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 
-const getCart = createAsyncThunk("cartSlice/getCart",async () => {
+const getCart = createAsyncThunk("cartSlice/getCart",async (_, { getState }) => {
     try {
         let cart;
-        const token = localStorage.getItem('token');
+        const token = getState().token;
         if(token) {
             const res = await axiosInstance.get('/cart')
-            // ! database cart overwrites local cart
             let totalPrice = 0;
-            res.data.cart.map(item => totalPrice +=  Number(item.product.price) * Number(item.quantity));
             let count = 0;
-            res.data.cart.map(item => count += Number(item.quantity))
-            cart = { count: count, totalPrice:totalPrice, cartItems: res.data.cart }
-            localStorage.setItem('cart', JSON.stringify(cart));
+            res.data.cart.forEach(item => {
+                totalPrice +=  Number(item.product.price) * Number(item.quantity);
+                count += Number(item.quantity);
+            });
+            if(res.data.cart.length !== 0) {
+                cart = { count, totalPrice, cartItems: res.data.cart }
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } else {
+                const localCart = localStorage.getItem('cart');
+                cart = localCart ? JSON.parse(localCart) : {count: 0, totalPrice:0, cartItems: []};
+            }
         }
         else {
             const localCart = localStorage.getItem('cart');
@@ -85,7 +91,7 @@ const cartSlice = createSlice({
             state.totalPrice -= action.payload.item.price;
             localStorage.setItem('cart', JSON.stringify(state));
         },
-        reset: (state, action) => {
+        resetCart: (state, action) => {
             state.count = 0;
             state.totalPrice = 0;
             state.cartItems = [];
@@ -98,6 +104,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const {addToCart, removeFromCart, increaseCountByOne, decreaseCountByOne, reset} = cartSlice.actions;
+export const {addToCart, removeFromCart, increaseCountByOne, decreaseCountByOne, resetCart} = cartSlice.actions;
 export {getCart};
 export default cartSlice.reducer;
