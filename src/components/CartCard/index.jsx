@@ -14,7 +14,7 @@ const CartCard = ({ item }) => {
     // const cart = useSelector(store => store.cart);
     return (
         <div className="row border border-white rounded-1 mb-2 py-3 px-2 justify-content-between">
-            <div className="row col-md-6 p-0">
+            <div className="row col-md-7 p-0">
                 <div className="col-4 p-0">
                     <img
                         className="img-fluid"
@@ -30,7 +30,7 @@ const CartCard = ({ item }) => {
                     <span>{item.name}</span>
                 </div>
             </div>
-            <div className="row col-md-6 px-0 py-3 justify-content-center">
+            <div className="row col-md-5 px-0 py-3 justify-content-center">
                 <div className="col-4 col-md-5 text-center d-flex flex-column justify-content-center align-items-center p-0">
                     <ProductCounter key={item._id} item={item} />
                 </div>
