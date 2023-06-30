@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../APIs/config";
 
-// const localCart = JSON.parse(localStorage.getItem('cart'));
-
 const getCart = createAsyncThunk("cartSlice/getCart",async (_, { getState }) => {
     try {
         let cart;
@@ -21,6 +19,9 @@ const getCart = createAsyncThunk("cartSlice/getCart",async (_, { getState }) => 
             } else {
                 const localCart = localStorage.getItem('cart');
                 cart = localCart ? JSON.parse(localCart) : {count: 0, totalPrice:0, cartItems: []};
+                cart.cartItems.forEach(item => {
+                    axiosInstance.post(`cart/${item.product._id}`, {quantity: item.quantity})
+                })
             }
         }
         else {
@@ -31,11 +32,6 @@ const getCart = createAsyncThunk("cartSlice/getCart",async (_, { getState }) => 
     } catch (error) { console.log(error) }
 })
 
-// const init = localCart ? localCart :{
-//     count: 0,
-//     totalPrice: 0,
-//     cartItems: []
-// }
 const cartSlice = createSlice({
     name: 'cartSlice',
     initialState: {count: 0, totalPrice:0, cartItems: []},
