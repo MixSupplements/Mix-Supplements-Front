@@ -1,12 +1,21 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/userProfile/accountDetails.module.css";
 import './checkout.css'
 import OrderCard from "../../components/OrderCard";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../APIs/config";
+import { useNavigate } from "react-router-dom";
+import { resetCart } from "../../redux/slices/cart";
 
 const Checkout = () => {
     const [userDetails, setUserDetails] = useState({});
+    const [selectedValue, setSelectedValue] = useState({});
+    const navigate = useNavigate();
+    const dispatcher = useDispatch();
+    const handleAddressChange = (event) => {
+        const value = JSON.parse(event.target.value);
+        setSelectedValue(value);
+    }
     useEffect(() => {
         window.scrollTo(0, 0);
         axiosInstance
@@ -17,6 +26,7 @@ const Checkout = () => {
             })
             .then((res) => {
                 setUserDetails(res.data);
+                setSelectedValue(res.data.addresses[0])
             })
             .catch((error) => console.log(error));
     }, []);
@@ -24,6 +34,27 @@ const Checkout = () => {
     const currencyFormat = (price) => {
         return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
     };
+    let orderProducts = cart.cartItems.map(item => {
+        return {
+            _id: item.product._id,
+            quantity: item.quantity
+        }
+    })
+    const confirmOrder = () => {
+        axiosInstance.post('/order',{
+            customerId: userDetails._id,
+            products: orderProducts,
+            totalPrice: cart.totalPrice,
+            shippingAddress: selectedValue
+        })
+        .then(res => {
+            axiosInstance.delete('/cart');
+            localStorage.removeItem('cart')
+            dispatcher(resetCart());
+            navigate('/user/orders')
+        })
+        .catch(err => console.log(err))
+    }
     return ( 
         <div className="row">
             <div className=" col-lg-6">
@@ -49,17 +80,17 @@ const Checkout = () => {
                     </div>
                     <div className="col-6 py-1 checkout-address-options">
                         <h4 className={styles["field-title"]}>Address</h4>
-                        <select className={`${styles["main-field"]} ${styles["inner-field"]} w-100 text-white`}>
+                        <select className={`${styles["main-field"]} ${styles["inner-field"]} w-100 text-white`} onChange={handleAddressChange}>
                                 {
                                     userDetails.addresses?.map(address => {
-                                        return <option key={address.street}>{address.governorate}, {address.city}, {address.street}</option>
+                                        return <option key={address.street} value={`{"governorate": "${address.governorate}", "city": "${address.city}", "street": "${address.street}"}`}>{address.governorate}, {address.city}, {address.street}</option>
                                     })
                                 }
                         </select>
                     </div>
                 </div>
                 <div className="mt-5">
-                    <button className="btn home-button w-100">Confirm</button>
+                    <button className="btn home-button w-100" onClick={() => {confirmOrder()}}>Confirm Order</button>
                 </div>
             </div>
             <div className="col-lg-6 p-0 pt-5 pt-lg-0 ps-lg-2">
