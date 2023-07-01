@@ -32,7 +32,7 @@ const Cart = () => {
     const token = useSelector((store) => store.token);
     const proceedToCheckout = () => {
         if (token) {
-            navigate(`/user/orders`);
+            navigate(`/checkout`);
         } else {
             navigate(`/login`);
         }
@@ -42,19 +42,10 @@ const Cart = () => {
         <div className="text-center">
             <h2>My Cart</h2>
             <div className="cart-content row pt-5">
-                <div className="cart-items text-start col-md-9 mb-3">
+                <div className="cart-items text-start col-lg-9 mb-3">
                     {showItems}
-                    <button
-                        className="btn home-button"
-                        onClick={() => {
-                            proceedToCheckout();
-                        }}
-                        disabled={emptyCart}
-                    >
-                        Proceed To Checkout
-                    </button>
                 </div>
-                <div className="cart-total  col-md-3">
+                <div className="cart-total text-start col-lg-3">
                     <div className="border border-white p-3 text-start rounded-2">
                         <h5>
                             <i className="fa-solid fa-bag-shopping"></i> Order Total
@@ -70,6 +61,15 @@ const Cart = () => {
                             </span>
                         </div>
                     </div>
+                    <button
+                        className="btn home-button"
+                        onClick={() => {
+                            proceedToCheckout();
+                        }}
+                        disabled={emptyCart}
+                    >
+                        Proceed To Checkout
+                    </button>
                 </div>
             </div>
         </div>

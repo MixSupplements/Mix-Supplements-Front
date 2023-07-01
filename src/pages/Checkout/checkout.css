@@ -1,0 +1,11 @@
+.order-items{
+    max-height: 21rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.order-items::-webkit-scrollbar{
+    display: none;
+}

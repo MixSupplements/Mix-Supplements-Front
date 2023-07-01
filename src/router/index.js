@@ -15,9 +15,11 @@ import UserOrders from "../components/UserProfile/UserOrders";
 import Cart from "../pages/Cart";
 import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
+import Checkout from "../pages/Checkout";
 
 const AppRouter = () => {
     const token = useSelector((store) => store.token);
+    const cart = useSelector((store) => store.cart);
     return (
         <Routes>
             <Route element={<PrimaryLayout />}>
@@ -28,6 +30,7 @@ const AppRouter = () => {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/product/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={token && cart.cartItems.length !==0? <Checkout />: <Shop />} />
                 <Route path="/search/:searchText" element={<Search />} />
                 <Route path="/user/*" element={<UserProfile />}>
                     <Route path="accountDetails/" element={token ? <AccountDetails /> : <Navigate to="/login" />} />
