@@ -1,0 +1,35 @@
+.order-details * {
+    color: var(--clr-neutral-900);
+}
+
+.order-details {
+    padding: 1rem;
+}
+
+.order-details .head {
+    font-size: 1.75rem;
+    font-weight: var(--fw-bold);
+}
+
+
+.order-details .back-icon svg {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.order-details table {
+    min-width: 500px;
+}
+
+.order-details .table-container {
+    overflow-x: auto;
+}
+
+.order-details .address-container a {
+    text-decoration: none;
+}
+
+.order-details .address-container a:hover {
+    text-decoration: underline;
+    color: var(--clr-accent-400);
+}

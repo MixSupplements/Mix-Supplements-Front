@@ -13,6 +13,10 @@ import AccountDetails from "../components/UserProfile/AccountDetails";
 import UserWishlist from "../components/UserProfile/UserWishlist";
 import UserOrders from "../components/UserProfile/UserOrders";
 import Cart from "../pages/Cart";
+import AdminLayout from "../layouts/AdminLayout";
+import Orders from "./../pages/Admin/Orders";
+import OrderList from "../pages/Admin/Orders/OrderList/OrderList";
+import OrderDetails from "../pages/Admin/OrderDetails/OrderDetails";
 import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
 import Checkout from "../pages/Checkout";
@@ -22,6 +26,12 @@ const AppRouter = () => {
     const cart = useSelector((store) => store.cart);
     return (
         <Routes>
+            <Route path="/Admin/Dashboard" element={<AdminLayout />} >
+                <Route path="Orders" element={<Orders />} >
+                    <Route path=":status?" element={<OrderList />} />
+                </Route>
+                <Route path="Order/:orderNumber" element={<OrderDetails />} />
+            </Route>
             <Route element={<PrimaryLayout />}>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Home />} />
