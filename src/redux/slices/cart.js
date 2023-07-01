@@ -58,16 +58,18 @@ const cartSlice = createSlice({
             localStorage.setItem('cart', JSON.stringify(state));
         },
         increaseCountByOne: (state, action) => {
-            if(localStorage.getItem('token')){
-                axiosInstance.post(`/cart/${action.payload.item._id}`)
-            }
-            state.count += 1;
             const index = state.cartItems.findIndex(item => item.product._id === action.payload.item._id);
-            if(index !== -1){
-                state.cartItems[index].quantity += 1;
+            if(state.cartItems[index].product.quantity > state.cartItems[index].quantity){
+                if(localStorage.getItem('token')){
+                    axiosInstance.post(`/cart/${action.payload.item._id}`)
+                }
+                state.count += 1;
+                if(index !== -1){
+                    state.cartItems[index].quantity += 1;
+                }
+                state.totalPrice += action.payload.item.price;
+                localStorage.setItem('cart', JSON.stringify(state));
             }
-            state.totalPrice += action.payload.item.price;
-            localStorage.setItem('cart', JSON.stringify(state));
         },
         decreaseCountByOne: (state, action) => {
             if(localStorage.getItem('token')){
