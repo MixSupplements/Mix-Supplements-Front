@@ -1,0 +1,37 @@
+.wishlist-item-container {
+    border-radius: var(--size-400);
+    background-color: var(--clr-neutral-600);
+    padding: var(--size-400);
+    margin-bottom: var(--size-500);
+    position: relative;
+}
+
+.controls-container {
+    display: flex;
+    align-items: center;
+    gap: var(--size-400);
+}
+
+.cart-btn {
+    width: 44px;
+    white-space: nowrap;
+    border-color: var(--clr-primary-400) !important;
+    color: var(--clr-primary-400) !important;
+    transition: 0.3s background-color, 0.3s color, 0.3s width !important;
+    overflow: hidden !important;
+    &:hover {
+        width: 135px;
+        color: black !important;
+        background-color: var(--clr-primary-400) !important;
+    }
+}
+
+.remove-btn {
+    width: 40px;
+    white-space: nowrap;
+    transition: 0.3s width !important;
+    overflow: hidden !important;
+    &:hover {
+        width: 167px;
+    }
+}
