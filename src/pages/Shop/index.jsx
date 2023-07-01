@@ -51,7 +51,7 @@ const Shop = () => {
     [...document.querySelectorAll("input:checked")].length === 0
       ? setChecked(false)
       : setChecked(true);
-  }, [[...document.querySelectorAll("input:checked")].length]);
+  }, [brandFilters, originFilters, weightFilters, allProducts]);
 
   return (
     <div className="row justify-content-between">
