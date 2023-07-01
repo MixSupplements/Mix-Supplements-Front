@@ -21,7 +21,6 @@ const Shop = () => {
     axiosInstance
       .get("/products")
       .then((res) => {
-        console.log(res.data);
         setAllProducts(res.data);
       })
       .catch((err) => console.log(err));
