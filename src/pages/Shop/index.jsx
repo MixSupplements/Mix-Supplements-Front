@@ -15,6 +15,7 @@ const Shop = () => {
   const [brandFilters, setBrandFilters] = useState([]);
   const [originFilters, setOriginFilters] = useState([]);
   const [weightFilters, setWeightFilters] = useState([]);
+  const [end, setEnd] = useState(20);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,6 +52,7 @@ const Shop = () => {
     [...document.querySelectorAll("input:checked")].length === 0
       ? setChecked(false)
       : setChecked(true);
+    setEnd(20);
   }, [brandFilters, originFilters, weightFilters, allProducts]);
 
   return (
@@ -427,28 +429,46 @@ const Shop = () => {
           </div>
         </div>
       </aside>
-      <main className="row col-md-9 justify-content-center">
+      <main className="row col-md-9 justify-content-start">
         {checked ? (
           filteredProducts?.length > 0 ? (
             <>
-              {filteredProducts?.map((product) => {
+              {filteredProducts?.slice(0, end).map((product) => {
                 return <ProductCard key={product._id} product={product} />;
               })}
-              <div className="row justify-content-center mt-4">
-                <button className="btn load-btn">LOAD MORE</button>
-              </div>
+              {end < filteredProducts.length ? (
+                <div className="row justify-content-center mt-4 mx-auto">
+                  <button
+                    onClick={(e) => {
+                      setEnd(end + 20);
+                    }}
+                    className="btn load-btn"
+                  >
+                    LOAD MORE
+                  </button>
+                </div>
+              ) : null}
             </>
           ) : (
             <div className={styles["empty-placeholder"]}>No Products Found</div>
           )
         ) : allProducts?.length > 0 ? (
           <>
-            {allProducts?.map((product) => {
+            {allProducts?.slice(0, end).map((product) => {
               return <ProductCard key={product._id} product={product} />;
             })}
-            <div className="row justify-content-center mt-4">
-              <button className="btn load-btn">LOAD MORE</button>
-            </div>
+            {end < allProducts.length ? (
+              <div className="row justify-content-center mt-4 mx-auto">
+                <button
+                  onClick={(e) => {
+                    setEnd(end + 20);
+                  }}
+                  className="btn load-btn"
+                >
+                  LOAD MORE
+                </button>
+              </div>
+            ) : null}
           </>
         ) : (
           <div className={styles["empty-placeholder"]}>No Products Found</div>
