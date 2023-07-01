@@ -430,22 +430,32 @@ const Shop = () => {
       <main className="row col-md-9 justify-content-center">
         {checked ? (
           filteredProducts?.length > 0 ? (
-            [...new Set(filteredProducts)]?.map((product) => {
-              return <ProductCard key={product._id} product={product} />;
-            })
+            <>
+              {[...new Set(filteredProducts)]?.map((product) => {
+                return <ProductCard key={product._id} product={product} />;
+              })}
+              <div className="row justify-content-center mt-4">
+                <button className="btn load-btn">LOAD MORE</button>
+              </div>
+            </>
           ) : (
             <div className={styles["empty-placeholder"]}>No Products Found</div>
           )
         ) : allProducts?.length > 0 ? (
-          allProducts?.map((product) => {
-            return <ProductCard key={product._id} product={product} />;
-          })
+          <>
+            {allProducts?.map((product) => {
+              return <ProductCard key={product._id} product={product} />;
+            })}
+            <div className="row justify-content-center mt-4">
+              <button className="btn load-btn">LOAD MORE</button>
+            </div>
+          </>
         ) : (
           <div className={styles["empty-placeholder"]}>No Products Found</div>
         )}
-        <div className="row justify-content-center mt-4">
-          <button className="btn load-btn">LOAD MORE</button>
-          {/* <Pagination
+        {/* <div className="row justify-content-center mt-4">
+        <button className="btn load-btn">LOAD MORE</button>
+        <Pagination
             count={10}
             shape="rounded"
             size="large"
@@ -456,8 +466,8 @@ const Shop = () => {
                   justifyContent: 'center'
                 },
               }}
-          /> */}
-        </div>
+          />
+        </div> */}
       </main>
     </div>
   );
