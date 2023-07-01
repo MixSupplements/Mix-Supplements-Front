@@ -73,10 +73,9 @@ code {
 }
 
 @media (min-width: 992px) {
-  .primaryLayout-outlet-container {
+    .primaryLayout-outlet-container {
     margin-top: var(--size-1100);
-  }
-}
+    }
     .primaryLayout-outlet-container {
         margin-top: var(--size-1100);
     }
