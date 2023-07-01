@@ -8,13 +8,21 @@
     background-color: var(--clr-neutral-900);
     font-size: var(--fs--700);
     height: 100vh;
-    max-width: 250px;
+    max-width: 200px;
     padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .admin-dashboard .logo {
     width: 150px;
     padding-top: var(--size-600);
+}
+
+.admin-dashboard .main {
+    margin-left: 200px;
 }
 
 .admin-dashboard .side-menu a {
@@ -44,6 +52,14 @@
         max-width: unset;
         margin: 0;
         padding: 0;
+        position: unset;
+        top: unset;
+        left: unset;
+        bottom: unset;
+    }
+
+    .admin-dashboard .main {
+        margin-left: 0;
     }
 
     .admin-dashboard .nav-links {
@@ -69,5 +85,4 @@
         font-size: inherit;
     }
 
-    .admin-dashboard .nav-links a:hover {}
 }

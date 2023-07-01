@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faRectangleXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,7 +19,7 @@ export default function AdminLayout() {
     };
     return (
         <Container fluid className='admin-dashboard'>
-            <Row>
+            <Row className=''>
                 <Col className='side-menu px-3' xs={12} md={3} xl={2}>
                     <div className="text-center d-flex flex-md-column justify-content-between align-items-md-center ">
                         <span className='d-none d-sm-inline d-md-none p-2 ' style={{ width: '30px' }}></span>
@@ -27,11 +27,11 @@ export default function AdminLayout() {
                         <FontAwesomeIcon icon={menuIcon} size="2xl" className="d-md-none" onClick={toggleMobileMenu} />
                     </div>
                     <div className={`nav-links d-flex flex-column justify-content-evenly align-content-center ${linksVisible ? '' : 'hidden'}`}>
-                        <Link>Dashboard</Link>
-                        <Link>Orders</Link>
+                        <NavLink to="/Admin/Dashboard">Dashboard</NavLink>
+                        <NavLink to="/Admin/Dashboard/Orders">Orders</NavLink>
                     </div>
                 </Col>
-                <Col>
+                <Col className='main'>
                     <Outlet />
                 </Col>
             </Row>
