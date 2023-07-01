@@ -27,8 +27,8 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = [];
-    let condition = [];
+    const filtered = [];
+    const condition = [];
     if (brandFilters.length > 0)
       condition.push(
         "brandFilters?.some((filter) => filter === product?.brand)"
@@ -431,7 +431,7 @@ const Shop = () => {
         {checked ? (
           filteredProducts?.length > 0 ? (
             <>
-              {[...new Set(filteredProducts)]?.map((product) => {
+              {filteredProducts?.map((product) => {
                 return <ProductCard key={product._id} product={product} />;
               })}
               <div className="row justify-content-center mt-4">
