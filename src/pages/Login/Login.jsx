@@ -15,6 +15,19 @@ function Login() {
         window.scrollTo(0, 0);
     }, []);
 
+    useEffect(() => {
+        const newUser = localStorage.getItem('newUser')? JSON.parse(localStorage.getItem('newUser')): null;
+        if(newUser !== null){
+        axiosInstance
+            .post("/register", newUser)
+            .then((res) => {
+                console.log(res);
+                localStorage.removeItem('newUser')
+            })
+            .catch((error) => console.log(error));
+        }
+    },[])
+
     const navigate = useNavigate();
     const dispatcher = useDispatch();
 
