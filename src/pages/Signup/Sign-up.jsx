@@ -132,12 +132,18 @@ function Signup() {
             setValidForm({ ...ValidForm, confirmPassword: false });
             return;
         }
-        axiosInstance
-            .post("/register", formData)
-            .then((res) => {
-                navigate(`/login`);
-            })
-            .catch((error) => console.log(error));
+        axiosInstance.post('/verify', {to: formData.email})
+        .then(res => {
+            localStorage.setItem('newUser', JSON.stringify(formData));
+            navigate('/verification');
+        })
+        .catch(err => console.log(err))
+        // axiosInstance
+        //     .post("/register", formData)
+        //     .then((res) => {
+        //         navigate(`/login`);
+        //     })
+        //     .catch((error) => console.log(error));
     };
     return (
         <div className="signup template d-flex justify-content-center align-items-center">
