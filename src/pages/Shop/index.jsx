@@ -32,7 +32,7 @@ const Shop = () => {
     const condition = [];
     if (brandFilters.length > 0)
       condition.push(
-        "brandFilters?.some((filter) => filter === product?.brand)"
+        "brandFilters?.some((filter) => filter === product?.details?.brand)"
       );
     if (originFilters.length > 0)
       condition.push(

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/slices/token";
 
 import "./Login.css";
+import { getCart } from "../../redux/slices/cart";
 
 function Login() {
     useEffect(() => {
@@ -32,6 +33,7 @@ function Login() {
                 dispatcher(setToken(res.data.token));
                 localStorage.setItem("token", res.data.token);
                 navigate(`/home`);
+                dispatcher(getCart())
             })
             .catch((error) => setInvalid(true));
     };

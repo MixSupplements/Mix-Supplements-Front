@@ -1,0 +1,10 @@
+.admin-dashboard .orders-nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--fw-semi-bold);
+}
+
+.admin-dashboard .orders-page .btn-group {
+    max-width: 600px;
+}
