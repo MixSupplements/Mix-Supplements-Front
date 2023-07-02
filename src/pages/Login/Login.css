@@ -17,7 +17,7 @@
 
 .login .form-control {
     border: none;
-    border-bottom: 1px solid var(--clr-primary-400);
+    border-bottom: 2px solid var(--clr-primary-400);
 }
 .login div label {
     color: var(--clr-neutral-900) !important;
@@ -51,4 +51,11 @@
 }
 .login .custom-input-label {
     color: var(--clr-neutral-100) !important;
+}
+
+.login .error-field {
+    border-bottom-color: var(--clr-accent-400);
+}
+.login .error-field:focus {
+    border-bottom-color: var(--clr-accent-400);
 }
