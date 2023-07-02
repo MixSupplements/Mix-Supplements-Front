@@ -8,6 +8,7 @@ import { setToken } from "../../redux/slices/token";
 
 import "./Login.css";
 import { getCart } from "../../redux/slices/cart";
+import { getWishlist } from "../../redux/slices/wishlist";
 
 function Login() {
     useEffect(() => {
@@ -33,7 +34,8 @@ function Login() {
                 dispatcher(setToken(res.data.token));
                 localStorage.setItem("token", res.data.token);
                 navigate(`/home`);
-                dispatcher(getCart())
+                dispatcher(getCart());
+                dispatcher(getWishlist());
             })
             .catch((error) => setInvalid(true));
     };
@@ -51,11 +53,13 @@ function Login() {
                     <div className="form-floating mb-3">
                         <input
                             type="email"
-                            className="form-control login-form-control"
+                            className={`form-control ${invalid && "error-field is-invalid"}`}
                             id="floatingInput"
                             placeholder="name@example.com"
+                            value={email}
                             onChange={(e) => {
                                 setEmail(e.target.value.toLowerCase());
+                                setInvalid(false);
                             }}
                         />
                         <label htmlFor="floatingInput">Email address</label>
@@ -63,14 +67,17 @@ function Login() {
                     <div className="form-floating mb-3">
                         <input
                             type="password"
-                            className="form-control login-form-control"
+                            className={`form-control ${invalid && "error-field is-invalid"}`}
                             id="floatingPassword"
                             placeholder="Password"
+                            value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
+                                setInvalid(false);
                             }}
                         />
                         <label htmlFor="floatingPassword">Password</label>
+                        {invalid && <div className="text-danger">Invalid email or password!</div>}
                     </div>
 
                     <div className="mb-2">
@@ -104,7 +111,7 @@ function Login() {
                             Sign Up
                         </Link>
                     </p>
-                    {invalid ? (
+                    {/* {invalid ? (
                         <div
                             className="alert alert-danger alert-dismissible fade show"
                             role="alert"
@@ -122,7 +129,7 @@ function Login() {
                         </div>
                     ) : (
                         ""
-                    )}
+                    )} */}
                 </form>
             </div>
         </div>
