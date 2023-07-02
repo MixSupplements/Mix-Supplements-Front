@@ -195,71 +195,78 @@ const Navbar = () => {
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link" aria-current="page" to="">
-                                            Our Stores
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link" aria-current="page" to="">
-                                            Contact Us
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col-lg-2"></div>
-                    </nav>
-                </div>
-                <div
-                    className="collapse navbar-collapse flex-grow-0 d-lg-none"
-                    id="navbarSupportedContent"
-                >
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                        <li className="nav-item">
-                            <NavLink className="nav-link active" aria-current="page" to="/home">
-                                Home
-                            </NavLink>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <NavLink
-                                className="nav-link dropdown-toggle"
-                                to="/"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Categories
-                            </NavLink>
-                            <ul className="dropdown-menu opacity-100 col-12 text-center">
-                                <li>
-                                    <NavLink className="dropdown-item" to="">
-                                        Supplements
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="dropdown-item" to="">
-                                        Sportswear
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" aria-current="page" to="">
-                                Our Stores
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" aria-current="page" to="">
-                                Contact Us
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-        </>
-    );
+                                    </li> */}
+                  <li className="nav-item">
+                    <NavLink className="nav-link" aria-current="page" to="">
+                      Our Stores
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      aria-current="page"
+                      href="#contact-us"
+                    >
+                      Contact Us
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div
+          className="collapse navbar-collapse flex-grow-0 d-lg-none"
+          id="navbarSupportedContent"
+        >
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            <li className="nav-item">
+              <NavLink
+                className="nav-link active"
+                aria-current="page"
+                to="/home"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item dropdown">
+              <NavLink
+                className="nav-link dropdown-toggle"
+                to="/"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categories
+              </NavLink>
+              <ul className="dropdown-menu opacity-100 col-12 text-center">
+                <li>
+                  <NavLink className="dropdown-item" to="">
+                    Supplements
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="dropdown-item" to="">
+                    Sportswear
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="">
+                Our Stores
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="">
+                Contact Us
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </>
+  );
 };
 
 export default Navbar;
