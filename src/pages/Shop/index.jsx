@@ -76,7 +76,7 @@ const Shop = () => {
               id="collapseOne"
               className="accordion-collapse collapse show"
               aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
+              //   data-bs-parent="#accordionExample"
             >
               <div className="accordion-body shop-accordion-body">
                 <FormControlLabel
@@ -199,7 +199,7 @@ const Shop = () => {
               id="collapseTwo"
               className="accordion-collapse collapse"
               aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
+              //   data-bs-parent="#accordionExample"
             >
               <div className="accordion-body shop-accordion-body">
                 <FormControlLabel
@@ -322,7 +322,7 @@ const Shop = () => {
               id="collapseThree"
               className="accordion-collapse collapse"
               aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
+              //   data-bs-parent="#accordionExample"
             >
               <div className="accordion-body shop-accordion-body">
                 <FormControlLabel
