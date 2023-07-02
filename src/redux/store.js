@@ -11,6 +11,6 @@ const store = configureStore({
     },
 })
 
-store.dispatch(getWishlist());
+// store.dispatch(getWishlist());
 
 export default store;
