@@ -429,7 +429,7 @@ const Shop = () => {
           </div>
         </div>
       </aside>
-      <main className="row col-md-9 justify-content-center">
+      <main className="row col-md-9 justify-content-start">
         {checked ? (
           filteredProducts?.length > 0 ? (
             <>
