@@ -195,7 +195,7 @@ const Navbar = () => {
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                    </li> */}
+                                    </li>
                   <li className="nav-item">
                     <NavLink className="nav-link" aria-current="page" to="">
                       Our Stores
