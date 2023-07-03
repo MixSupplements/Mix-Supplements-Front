@@ -118,7 +118,7 @@ const ProductReview = ({ product }) => {
               Submit Review
             </button>
           ) : (
-            <p>Log in to add your review.</p>
+            <p className="fw-bolder">Log in to add your review.</p>
           )}
         </form>
       </div>
