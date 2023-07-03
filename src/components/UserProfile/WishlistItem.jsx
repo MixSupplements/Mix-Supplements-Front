@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../redux/slices/wishlist";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +19,7 @@ const WishlistItem = ({ item }) => {
                     <img src={item.images[0]?.imageUrl} alt="product" className="img-fluid" />
                 </div>
                 <div className="col-md-9 card-body p-0 pt-3 p-md-0">
-                    <h5 className="card-title">{item.name}</h5>
+                    <h5 className="card-title"><Link className="text-decoration-none text-white" to={`/shop/product/${item._id}`} >{item.name}</Link></h5>
                     <p>{currencyFormat(item.price) + " LE"}</p>
                     <div className={styles["controls-container"]}>
                         <div className={`btn ${styles["cart-btn"]}`}>
