@@ -64,20 +64,26 @@ const ProductReview = ({ product }) => {
         <h3 style={{ marginBottom: "var(--size-500)" }}>
           Overall Product Review
         </h3>
-        <ul className={styles["reviews-list"]}>
-          {reviews?.map((review) => (
-            <li key={review._id} className={styles["review"]}>
-              <div className="d-flex justify-content-between">
-                <h5>{review.customer?.name}</h5>
-                <ProductRate rate={review.score} readonly={true} />
-              </div>
-              <p className={styles["review-comment"]}>{review.comment}</p>
-              <p className="my-0 text-end">
-                {moment(review.updatedAt).format("MMM Do YYYY")}
-              </p>
-            </li>
-          ))}
-        </ul>
+        {reviews.length > 0 ? (
+          <ul className={styles["reviews-list"]}>
+            {reviews?.map((review) => (
+              <li key={review._id} className={styles["review"]}>
+                <div className="d-flex justify-content-between">
+                  <h5>{review.customer?.name}</h5>
+                  <ProductRate rate={review.score} readonly={true} />
+                </div>
+                <p className={styles["review-comment"]}>{review.comment}</p>
+                <p className="my-0 text-end">
+                  {moment(review.updatedAt).format("MMM Do YYYY")}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className={styles["empty-placeholder"]}>
+            Be the first one to review this product!
+          </div>
+        )}
       </div>
       <div className="col-md-5" style={{ height: "fit-content" }}>
         <h3 style={{ marginBottom: "var(--size-500)" }}>
