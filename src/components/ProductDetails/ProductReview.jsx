@@ -58,7 +58,6 @@ const ProductReview = ({ product }) => {
       })
       .catch((error) => console.log(error));
   };
-  console.log(moment(new Date()).format("MMM Do YY"));
   return (
     <div className={`row gap-3`} style={{ marginTop: "var(--size-600)" }}>
       <div className="col">
