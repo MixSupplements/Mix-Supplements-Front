@@ -434,7 +434,9 @@ const Shop = () => {
           filteredProducts?.length > 0 ? (
             <>
               {filteredProducts?.slice(0, end).map((product) => {
-                return <ProductCard key={product._id} product={product} />;
+                if(product.quantity !== 0){
+                  return <ProductCard key={product._id} product={product} />;
+                }
               })}
               {end < filteredProducts.length ? (
                 <div className="row justify-content-center mt-4 mx-auto">
@@ -455,7 +457,9 @@ const Shop = () => {
         ) : allProducts?.length > 0 ? (
           <>
             {allProducts?.slice(0, end).map((product) => {
-              return <ProductCard key={product._id} product={product} />;
+              if(product.quantity !== 0){
+                return <ProductCard key={product._id} product={product} />;
+              }
             })}
             {end < allProducts.length ? (
               <div className="row justify-content-center mt-4 mx-auto">
