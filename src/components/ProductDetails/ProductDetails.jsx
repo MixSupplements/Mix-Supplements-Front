@@ -140,10 +140,12 @@ const ProductDetails = ({ product }) => {
                 : "Remove Wishlist"}
             </button>
           </div>
-          <p className="col-12 text-center mt-2 fw-bold">
-            This products is out of stock at the moment. Please check again
-            later.
-          </p>
+          {product.quantity > 0 ? null : (
+            <p className="col-12 text-center mt-2 fw-bold">
+              This products is out of stock at the moment. Please check again
+              later.
+            </p>
+          )}
         </div>
       </div>
     </div>
