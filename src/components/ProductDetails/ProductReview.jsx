@@ -114,7 +114,13 @@ const ProductReview = ({ product }) => {
             />
           </div>
           {token ? (
-            <button type="submit" className={`btn ${styles["review-btn"]}`}>
+            <button
+              type="submit"
+              className={`btn ${styles["review-btn"]}`}
+              disabled={
+                !newReview.comment.trim() || !newReview.rating ? true : false
+              }
+            >
               Submit Review
             </button>
           ) : (
