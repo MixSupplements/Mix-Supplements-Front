@@ -43,7 +43,6 @@ const ProductDetails = ({ product }) => {
       dispatcher(addToWishlist(product));
     }
   };
-  console.log(product);
   return (
     <div className={`row gap-3 ${styles["details-card"]}`}>
       <div className="col-md-6">
