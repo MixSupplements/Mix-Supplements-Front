@@ -39,6 +39,8 @@ const cartSlice = createSlice({
         addToCart: (state, action) => {
             if(localStorage.getItem('token')){
                 axiosInstance.post(`/cart/${action.payload.item._id}`)
+                .then(res => console.log('cart updated successfully'))
+                .catch(err => console.log(err))
             }
             state.count += action.payload.count;
             state.totalPrice += action.payload.item.price * action.payload.count;
@@ -48,6 +50,8 @@ const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             if(localStorage.getItem('token')){
                 axiosInstance.delete(`/cart/${action.payload.item._id}`)
+                .then(res => console.log('cart updated successfully'))
+                .catch(err => console.log(err))
             }
             const index = state.cartItems.findIndex(item => item.product._id === action.payload.item._id);
             state.count -= state.cartItems[index].quantity;
@@ -62,6 +66,8 @@ const cartSlice = createSlice({
             if(state.cartItems[index].product.quantity > state.cartItems[index].quantity){
                 if(localStorage.getItem('token')){
                     axiosInstance.post(`/cart/${action.payload.item._id}`)
+                    .then(res => console.log('cart updated successfully'))
+                    .catch(err => console.log(err))
                 }
                 state.count += 1;
                 if(index !== -1){
@@ -74,6 +80,8 @@ const cartSlice = createSlice({
         decreaseCountByOne: (state, action) => {
             if(localStorage.getItem('token')){
                 axiosInstance.patch(`/cart/${action.payload.item._id}/decrease`)
+                .then(res => console.log('cart updated successfully'))
+                .catch(err => console.log(err))
             }
             state.count -= 1;
             const index = state.cartItems.findIndex(item => item.product._id === action.payload.item._id);
