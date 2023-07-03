@@ -133,7 +133,7 @@ const Navbar = () => {
                                         <li>
                                             <NavLink
                                                 className="dropdown-item"
-                                                to="/login"
+                                                to="/signout"
                                                 onClick={() => {
                                                     signoutSubmit();
                                                 }}
@@ -147,7 +147,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <nav className="col-1 col-lg-12 navbar navbar-expand-lg pb-1">
-                        <div className="container-fluid justify-content-center col-lg-10">
+                        <div className="container-fluid justify-content-center col-lg-10 ms-lg-0">
                             <button
                                 className="navbar-toggler me-5 me-sm-3"
                                 type="button"
@@ -173,7 +173,16 @@ const Navbar = () => {
                                             Home
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item">
+                                        <NavLink
+                                            className="nav-link"
+                                            aria-current="page"
+                                            to="/shop"
+                                        >
+                                            Shop
+                                        </NavLink>
+                                    </li>
+                                    {/* <li className="nav-item dropdown">
                                         <NavLink
                                             className="nav-link dropdown-toggle"
                                             to=""
@@ -195,7 +204,7 @@ const Navbar = () => {
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> */}
                   <li className="nav-item">
                     <NavLink className="nav-link" aria-current="page" to="">
                       Our Stores

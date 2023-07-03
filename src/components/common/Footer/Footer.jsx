@@ -87,7 +87,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="col mb-3">
+        <div id="contact-us" className="col mb-3">
           <h5>Contact Us</h5>
           <ul className="nav flex-column">
             <li className="nav-item mb-2">

@@ -37,6 +37,7 @@ const ProductCounter = ({ item }) => {
                 onClick={() => {
                     dispatcher(increaseCountByOne({ item: item }));
                 }}
+                disabled={itemCount < item.quantity ? false : true}
             >
                 <FontAwesomeIcon icon={faPlus} />
             </button>
