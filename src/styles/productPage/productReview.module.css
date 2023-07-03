@@ -6,9 +6,9 @@
   margin: 0;
   margin-bottom: var(--size-500);
 
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none !important;
-  }
+  } */
 }
 
 .review {
