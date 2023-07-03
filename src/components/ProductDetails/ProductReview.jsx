@@ -1,97 +1,119 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
+import axiosInstance from "../../APIs/config";
 import ProductRate from "./ProductRate";
 
 import styles from "../../styles/productPage/productReview.module.css";
 
-const ProductReview = () => {
-    const [newReview, setNewReview] = useState({
-        user: "dummy user",
-        rating: 0,
-        comment: "",
-    });
-    const [reviews, setReviews] = useState([
-        {
-            id: 1,
-            user: "John Doe",
-            rating: 5,
-            comment: "Great product! Highly recommended.",
-        },
-        {
-            id: 2,
-            user: "Jane Smith",
-            rating: 3,
-            comment:
-                "Good quality, but a bit expensive. test two lines  i hope this word fine ok let's try three linse with some hahah in it",
-        },
-        {
-            id: 3,
-            user: "Alice Johnson",
-            rating: 2,
-            comment: "Average product, nothing special.",
-        },
-    ]);
-    const handleChange = (event) => {
-        setNewReview((prevReview) => ({
-            ...prevReview,
-            comment: event.target.value,
-        }));
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setReviews([...reviews, newReview]);
+const ProductReview = ({ product }) => {
+  const params = useParams();
+
+  const token = useSelector((store) => store.token);
+
+  const [newReview, setNewReview] = useState({
+    rating: 1,
+    comment: "",
+  });
+
+  const [reviews, setReviews] = useState([]);
+
+  const getReviews = function () {
+    axiosInstance
+      .get(`/review/product/${params.id}`)
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getReviews();
+  }, [reviews.length]);
+
+  const handleChange = (event) => {
+    setNewReview((prevReview) => ({
+      ...prevReview,
+      comment: event.target.value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axiosInstance
+      .post(`/review`, {
+        productId: `${params.id}`,
+        score: newReview.rating,
+        comment: newReview.comment,
+      })
+      .then((res) => {
+        getReviews();
         setNewReview({
-            user: "dummy user",
-            rating: 0,
-            comment: "",
+          rating: 1,
+          comment: "",
         });
-    };
-    return (
-        <div className={`row gap-3`} style={{ marginTop: "var(--size-600)" }}>
-            <div className="col">
-                <h3 style={{ marginBottom: "var(--size-500)" }}>Overall Product Review</h3>
-                <ul className={styles["reviews-list"]}>
-                    {reviews.map((review) => (
-                        <li key={review.id} className={styles["review"]}>
-                            <div className="d-flex justify-content-between">
-                                <h5>{review.user}</h5>
-                                <ProductRate rate={review.rating} readonly={true} />
-                            </div>
-                            <p className={styles["review-comment"]}>{review.comment}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div className="col-md-5" style={{ height: "fit-content" }}>
-                <h3 style={{ marginBottom: "var(--size-500)" }}>Review this product </h3>
-                <form onSubmit={handleSubmit}>
-                    <div className={`form-group ${styles["form-field"]}`}>
-                        <span>Your Rate: </span>
-                        <ProductRate
-                            rate={newReview.rating}
-                            setNewRate={(rating) => setNewReview({ ...newReview, rating })}
-                        />
-                    </div>
-                    <div className={`form-group`} style={{ marginBottom: "var(--size-500)" }}>
-                        <label htmlFor="comment" className="form-label">
-                            Your Review
-                        </label>
-                        <textarea
-                            className={`form-control ${styles["review-input"]}`}
-                            name="comment"
-                            rows="3"
-                            style={{ resize: "none" }}
-                            value={newReview.comment}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <button type="submit" className={`btn ${styles["review-btn"]}`}>
-                        Submit Review
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
+      })
+      .catch((error) => console.log(error));
+  };
+  return (
+    <div className={`row gap-3`} style={{ marginTop: "var(--size-600)" }}>
+      <div className="col">
+        <h3 style={{ marginBottom: "var(--size-500)" }}>
+          Overall Product Review
+        </h3>
+        <ul className={styles["reviews-list"]}>
+          {reviews?.map((review) => (
+            <li key={review._id} className={styles["review"]}>
+              <div className="d-flex justify-content-between">
+                <h5>{review.customer?.name}</h5>
+                <ProductRate rate={review.score} readonly={true} />
+              </div>
+              <p className={styles["review-comment"]}>{review.comment}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="col-md-5" style={{ height: "fit-content" }}>
+        <h3 style={{ marginBottom: "var(--size-500)" }}>
+          Review this product{" "}
+        </h3>
+        <form onSubmit={handleSubmit}>
+          <div className={`form-group ${styles["form-field"]}`}>
+            <span>Your Rate: </span>
+            <ProductRate
+              rate={newReview.rating}
+              setNewRate={(rating) => setNewReview({ ...newReview, rating })}
+            />
+          </div>
+          <div
+            className={`form-group`}
+            style={{ marginBottom: "var(--size-500)" }}
+          >
+            <label htmlFor="comment" className="form-label">
+              Your Review
+            </label>
+            <textarea
+              className={`form-control ${styles["review-input"]}`}
+              name="comment"
+              rows="3"
+              style={{ resize: "none" }}
+              value={newReview.comment}
+              onChange={handleChange}
+            />
+          </div>
+          {token ? (
+            <button type="submit" className={`btn ${styles["review-btn"]}`}>
+              Submit Review
+            </button>
+          ) : (
+            <span>Log in to review this product.</span>
+          )}
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default ProductReview;
