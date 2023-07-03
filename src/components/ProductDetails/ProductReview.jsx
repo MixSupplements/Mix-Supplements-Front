@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import moment from "moment/moment";
 
 import axiosInstance from "../../APIs/config";
 import ProductRate from "./ProductRate";
@@ -57,6 +58,7 @@ const ProductReview = ({ product }) => {
       })
       .catch((error) => console.log(error));
   };
+  console.log(moment(new Date()).format("MMM Do YY"));
   return (
     <div className={`row gap-3`} style={{ marginTop: "var(--size-600)" }}>
       <div className="col">
@@ -71,6 +73,9 @@ const ProductReview = ({ product }) => {
                 <ProductRate rate={review.score} readonly={true} />
               </div>
               <p className={styles["review-comment"]}>{review.comment}</p>
+              <p className="my-0 text-end">
+                {moment(review.updatedAt).format("MMM Do YYYY")}
+              </p>
             </li>
           ))}
         </ul>
@@ -108,7 +113,7 @@ const ProductReview = ({ product }) => {
               Submit Review
             </button>
           ) : (
-            <span>Log in to review this product.</span>
+            <p>Log in to add your review.</p>
           )}
         </form>
       </div>
