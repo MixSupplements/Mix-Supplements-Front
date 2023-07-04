@@ -1,6 +1,7 @@
 .admin-dashboard {
     min-height: 100vh;
     background-color: var(--clr-neutral-100);
+    color: var(--clr-neutral-900);
 }
 
 /* Nav Bar Styling */
@@ -36,8 +37,18 @@
 }
 
 .admin-dashboard .nav-links a {
-    font-size: var(--fs-700);
-    margin: var(--size-200) 0;
+    font-size: 1.25rem;
+    margin: var(--size-100) 0;
+    padding: 5px 0;
+    border-radius: 10px;
+}
+
+.admin-dashboard .nav-links a:hover {
+    background-color: #0c0c0c;
+}
+
+.admin-dashboard .nav-links a.active {
+    font-weight: bold;
 }
 
 /* Nav Bar mobile */
@@ -52,7 +63,8 @@
         max-width: unset;
         margin: 0;
         padding: 0;
-        position: unset;
+        color: var(--clr-neutral-100);
+        position: relative;
         top: unset;
         left: unset;
         bottom: unset;
@@ -65,15 +77,15 @@
     .admin-dashboard .nav-links {
         height: 0;
         overflow: hidden;
-        transition: height 0.2s ease-in;
+        transition: all 0.2s ease-in;
         padding: 0;
     }
 
     .admin-dashboard .nav-links.hidden {
-        height: 64px;
+        height: auto;
     }
 
-    .admin-dashboard svg {
+    .admin-dashboard .side-menu svg {
         width: 30px;
         cursor: pointer;
         padding-top: var(--size-400);
@@ -81,8 +93,16 @@
 
     .admin-dashboard .nav-links a {
         text-align: center;
+        padding: 5px;
         margin: var(--size-100) 0;
         font-size: inherit;
     }
 
+    .admin-dashboard .nav-links a:hover {
+        background-color: var(--clr-neutral-900);
+    }
+
+    .admin-dashboard .nav-links a.active {
+        font-weight: bold;
+    }
 }
