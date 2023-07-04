@@ -23,35 +23,35 @@ const Footer = () => {
           <h5>Important Links</h5>
           <ul className="nav flex-column">
             <li className="nav-item mb-2">
-              <Link to="/home" className="nav-link p-0 text-body-secondary">
+              <a href="/home" className="nav-link p-0 text-body-secondary">
                 Home
-              </Link>
+              </a>
             </li>
             <li className="nav-item mb-2">
-              <Link to="/shop" className="nav-link p-0 text-body-secondary">
+              <a href="/shop" className="nav-link p-0 text-body-secondary">
                 Shop
-              </Link>
+              </a>
             </li>
             <li className="nav-item mb-2">
-              <Link
-                to="/user/accountDetails"
+              <a
+                href="/user/accountDetails"
                 className="nav-link p-0 text-body-secondary"
               >
                 My Account
-              </Link>
+              </a>
             </li>
             <li className="nav-item mb-2">
-              <Link to="/cart" className="nav-link p-0 text-body-secondary">
+              <a href="/cart" className="nav-link p-0 text-body-secondary">
                 My Cart
-              </Link>
+              </a>
             </li>
             <li className="nav-item mb-2">
-              <Link
-                to="/user/wishlist"
+              <a
+                href="/user/wishlist"
                 className="nav-link p-0 text-body-secondary"
               >
                 My Wishlist
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
