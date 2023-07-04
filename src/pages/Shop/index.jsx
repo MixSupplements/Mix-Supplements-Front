@@ -4,6 +4,7 @@ import axiosInstance from "../../APIs/config";
 
 import ProductCard from "../../components/ProductCard";
 
+import { Rating } from "@mui/material";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import "./shop.css";
 import styles from "../../styles/userProfile/userWishlist.module.css";
@@ -16,6 +17,8 @@ const Shop = () => {
   const [originFilters, setOriginFilters] = useState([]);
   const [weightFilters, setWeightFilters] = useState([]);
   const [end, setEnd] = useState(20);
+  const [loading, setLoading] = useState(true);
+  const tempCards = [1,2,3,4];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,6 +26,7 @@ const Shop = () => {
       .get("/products")
       .then((res) => {
         setAllProducts(res.data);
+        setLoading(false)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -56,8 +60,8 @@ const Shop = () => {
   }, [brandFilters, originFilters, weightFilters, allProducts]);
 
   return (
-    <div className="row justify-content-between">
-      <aside className="col-md-3 px-0 shop-filters-section">
+    <div className="row justify-content-md-between justify-content-center">
+      <aside className="col-10 col-md-3 px-0 shop-filters-section mb-3">
         <div className="accordion" id="accordionExample">
           <div className="accordion-item" id="brand-filter">
             <h2 className="accordion-header" id="headingOne">
@@ -429,8 +433,49 @@ const Shop = () => {
           </div>
         </div>
       </aside>
-      <main className="row col-md-9 justify-content-start">
-        {checked ? (
+      <main className="row col-md-9 justify-content-center justify-content-md-start">
+        {loading ? tempCards.map((tempCard)=><div key={tempCard} className="col-5 col-md-4 col-lg-3 p-2">
+          <div className="card product-card" >
+              <img                    
+                  className="card-img-top skeleton skeleton-img"
+                  alt=""
+              />
+              <div className="card-body">
+                  <Rating
+                      name="read-only skeleton"
+                      sx={{
+                          "& .MuiRating-iconFilled": {
+                              color: "hsl(57, 100%, 50%)",
+                          },
+                          "& .MuiRating-iconEmpty": {
+                              color: "hsl(57, 100%, 50%)",
+                          },
+                      }}
+                      value={0}
+                      precision={0.5}
+                      readOnly
+                  />
+                  <h5 className="card-title product-card-title mt-3 skeleton skeleton-text">{}</h5>
+                  <p className="card-text product-card-text skeleton skeleton-price">
+                      {}
+                  </p>
+                  <div className="row justify-content-between fs-4 mt-4">
+                      <i
+                          
+                          className={`${
+                              "fa-cart-plus"
+                          } fa-solid  col-4 p-0 text-end cart-btn`}
+                      ></i>
+                      <i
+                          
+                          className={`${
+                              "fa-regular"
+                          } fa-heart col-4 p-0 text-start wishlist-btn`}
+                      ></i>
+                  </div>
+              </div>
+          </div>
+      </div>) : checked ? (
           filteredProducts?.length > 0 ? (
             <>
               {filteredProducts?.slice(0, end).map((product) => {
@@ -473,6 +518,8 @@ const Shop = () => {
         ) : (
           <div className={styles["empty-placeholder"]}>No Products Found</div>
         )}
+      
+        
         {/* <div className="row justify-content-center mt-4">
         <button className="btn load-btn">LOAD MORE</button>
         <Pagination
