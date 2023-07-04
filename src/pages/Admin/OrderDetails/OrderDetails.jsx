@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { useDispatch } from "react-redux";
+import { setToken } from '../../../redux/slices/token';
+import { resetCart } from '../../../redux/slices/cart';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft } from '@fortawesome/free-regular-svg-icons';
 
@@ -8,6 +13,8 @@ import axiosInstance from '../../../APIs/config';
 import { faEnvelope, faHouse, faPhone, faTruck } from '@fortawesome/free-solid-svg-icons';
 
 export default function OrderDetails() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { orderNumber } = useParams();
     const [order, setOrder] = useState();
     const [statusTransitions] = useState({
@@ -46,10 +53,18 @@ export default function OrderDetails() {
                 console.log(response.data);
                 setOrder(response.data);
             })
-            .catch((error => console.log(error)));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    dispatch(setToken(""));
+                    dispatch(resetCart());
+                    navigate(`/login`);
+                }});
     }, [])
 
-    const navigate = useNavigate();
     const goBack = () => {
         navigate(-1);
     };
@@ -83,7 +98,16 @@ export default function OrderDetails() {
                     order.status = transition;
                 }
             })
-            .catch((error => console.log(error)));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    dispatch(setToken(""));
+                    dispatch(resetCart());
+                    navigate(`/login`);
+                }});
     }
 
     return (
