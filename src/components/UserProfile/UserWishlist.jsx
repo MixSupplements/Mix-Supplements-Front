@@ -17,7 +17,7 @@ const UserWishlist = () => {
             {wishlist.wishlistItems.length ? (
                 wishlist.wishlistItems.map((item) => <WishlistItem key={item._id} item={item} />)
             ) : (
-                <div className={styles["empty-placeholder"]}>No Product Found</div>
+                <div className={styles["empty-placeholder"]}>No Products In Your Wishlist Yet</div>
             )}
         </div>
     );

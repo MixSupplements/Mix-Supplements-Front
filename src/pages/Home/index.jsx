@@ -206,8 +206,10 @@ const Home = () => {
 
             <h2>Popular Products</h2>
             <section className="row justify-content-center home-section" id="home-products">
-                {productList.map((product) => {
-                    return <ProductCard key={product._id} product={product} />;
+                {productList.map((product, i) => {
+                    if(product.quantity !== 0 && i <= 8){
+                        return <ProductCard key={product._id} product={product} />;
+                    }
                 })}
             </section>
         </>

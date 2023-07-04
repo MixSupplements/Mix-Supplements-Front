@@ -1,53 +1,60 @@
 .signup .form_container {
-  width: 40%;
-  background-color: var(--clr-neutral-900) !important;
+    width: 40%;
+    background-color: var(--clr-neutral-900) !important;
 }
 
 @media screen and (max-width: 1000px) {
-  .signup .form_container {
-    width: 45%;
-  }
+    .signup .form_container {
+        width: 45%;
+    }
 }
 
 @media screen and (max-width: 700px) {
-  .signup .form_container {
-    width: 65%;
-  }
+    .signup .form_container {
+        width: 65%;
+    }
 }
 
 .signup .form-control {
-  border: none;
-  border-bottom: 1px solid var(--clr-primary-400);
+    border: none;
+    border-bottom: 2px solid var(--clr-primary-400);
 }
 .signup div label {
-  color: var(--clr-neutral-900) !important;
+    color: var(--clr-neutral-900) !important;
 }
 .signup .form-control:focus {
-  box-shadow: none;
-  border-bottom-color: var(--clr-primary-400);
+    box-shadow: none;
+    border-bottom-color: var(--clr-primary-400);
 }
 .signup .form-control:focus + label {
-  color: var(--clr-neutral-900);
+    color: var(--clr-neutral-900);
 }
 .signup .form {
-  padding: 1em;
-  border: 1px solid #f1f1f1;
-  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+    padding: 1em;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
 }
 @media only screen and (min-width: 768px) {
-  .signup .form {
-    width: 50%;
-  }
+    .signup .form {
+        width: 50%;
+    }
 }
 
 .signup-btn:link,
 .signup-btn:visited {
-  color: var(--clr-neutral-900);
-  text-decoration: none;
+    color: var(--clr-neutral-900);
+    text-decoration: none;
 }
 
 .signup .in-btn {
-  background-color: var(--clr-primary-400) !important;
-  color: var(--clr-neutral-900);
-  border: none;
+    background-color: var(--clr-primary-400) !important;
+    color: var(--clr-neutral-900);
+    border: none;
+}
+
+.signup .error-field {
+    border-bottom-color: var(--clr-accent-400);
+}
+.signup .error-field:focus {
+    border-bottom-color: var(--clr-accent-400);
 }

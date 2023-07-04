@@ -21,6 +21,7 @@ import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
 import Checkout from "../pages/Checkout";
 import Products from "../pages/Admin/Products/Products";
+import Verification from "../pages/Verification";
 
 const AppRouter = () => {
     const token = useSelector((store) => store.token);
@@ -53,6 +54,7 @@ const AppRouter = () => {
                 </Route>
                 <Route path="*" element={<NotFound />} />
             </Route>
+            <Route path="/verification" element={<Verification />} />
         </Routes>
     );
 };

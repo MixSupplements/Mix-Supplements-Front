@@ -12,8 +12,21 @@ const getWishlist = createAsyncThunk("wishlistSlice/getWishlist", async (_, { ge
                     Authorization: `Bearer ${token}`
                 }
             });
-            wishlist = { count: res.data.length, wishlistItems: res.data };
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            if (res.data.length) {
+                wishlist = { count: res.data.length, wishlistItems: res.data };
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            }
+            else {
+                const localWishlist = localStorage.getItem('wishlist');
+                wishlist = localWishlist ? JSON.parse(localWishlist) : { count: 0, wishlistItems: [] };
+                wishlist.wishlistItems.forEach(async item => {
+                    await axiosInstance.patch(`/wishlist/add/${item._id}`, {}, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                })
+            }
         }
         else {
             const localWishlist = localStorage.getItem('wishlist');
@@ -34,6 +47,8 @@ const wishlistSlice = createSlice({
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 })
+                .then(res => console.log('wishlist updated successfully'))
+                .catch(err => console.log(err))
             }
             state.count += 1;
             state.wishlistItems.push(action.payload);
@@ -46,6 +61,8 @@ const wishlistSlice = createSlice({
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 })
+                .then(res => console.log('cart updated successfully'))
+                .catch(err => console.log(err))
             }
             state.count -= 1;
             state.wishlistItems = state.wishlistItems.filter((item) => action.payload._id !== item._id);

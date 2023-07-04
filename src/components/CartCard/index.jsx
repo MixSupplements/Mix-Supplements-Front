@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeFromCart } from "../../redux/slices/cart";
 
 import ProductCounter from "../ProductDetails/ProductCounter";
@@ -27,7 +28,7 @@ const CartCard = ({ item }) => {
                     />
                 </div>
                 <div className="col-8 text-center d-flex flex-column justify-content-center p-0">
-                    <span>{item.name}</span>
+                    <Link className="text-decoration-none text-white" to={`/shop/product/${item._id}`} >{item.name}</Link>
                 </div>
             </div>
             <div className="row col-md-5 px-0 py-3 justify-content-center">

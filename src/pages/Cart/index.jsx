@@ -20,7 +20,7 @@ const Cart = () => {
     let showItems = [];
     let emptyCart = true;
     if (cart.cartItems.length === 0) {
-        showItems = <div className={styles["empty-placeholder"]}>No Product Found</div>;
+        showItems = <div className={styles["empty-placeholder"]}>No Products In Your Cart Yet</div>;
     } else {
         emptyCart = false;
         cart.cartItems.map((item) => {
