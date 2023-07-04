@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useDispatch } from "react-redux";
 import { setToken } from '../../../redux/slices/token';
-import { resetCart } from '../../../redux/slices/cart';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretLeft } from '@fortawesome/free-regular-svg-icons';
@@ -57,10 +56,7 @@ export default function OrderDetails() {
                 console.log(error);
                 if(error.response?.data?.error?.status === 402) {
                     localStorage.removeItem("token");
-                    localStorage.removeItem("cart");
-                    localStorage.removeItem("wishlist");
                     dispatch(setToken(""));
-                    dispatch(resetCart());
                     navigate(`/login`);
                 }});
     }, [])
@@ -102,10 +98,7 @@ export default function OrderDetails() {
                 console.log(error);
                 if(error.response?.data?.error?.status === 402) {
                     localStorage.removeItem("token");
-                    localStorage.removeItem("cart");
-                    localStorage.removeItem("wishlist");
                     dispatch(setToken(""));
-                    dispatch(resetCart());
                     navigate(`/login`);
                 }});
     }

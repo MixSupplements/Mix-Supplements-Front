@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { setToken } from '../../../../redux/slices/token';
-import { resetCart } from '../../../../redux/slices/cart';
 import moment from 'moment/moment';
 
 import "./OrderList.css";
@@ -34,10 +33,7 @@ export default function OrderList() {
                 console.log(error);
                 if(error.response?.data?.error?.status === 402) {
                     localStorage.removeItem("token");
-                    localStorage.removeItem("cart");
-                    localStorage.removeItem("wishlist");
                     dispatch(setToken(""));
-                    dispatch(resetCart());
                     navigate(`/login`);
                 }});
     }, [status])
