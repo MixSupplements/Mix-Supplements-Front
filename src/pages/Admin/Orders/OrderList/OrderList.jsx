@@ -35,7 +35,11 @@ export default function OrderList() {
                     localStorage.removeItem("token");
                     dispatch(setToken(""));
                     navigate(`/login`);
-                }});
+                }
+                if(error.response?.data?.error?.status === 403) {
+                    navigate(`/home`);
+                }
+            });
     }, [status])
 
     return (

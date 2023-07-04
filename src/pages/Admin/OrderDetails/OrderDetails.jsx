@@ -58,7 +58,11 @@ export default function OrderDetails() {
                     localStorage.removeItem("token");
                     dispatch(setToken(""));
                     navigate(`/login`);
-                }});
+                }
+                if(error.response?.data?.error?.status === 403) {
+                    navigate(`/home`);
+                }
+            });
     }, [])
 
     const goBack = () => {
@@ -100,7 +104,11 @@ export default function OrderDetails() {
                     localStorage.removeItem("token");
                     dispatch(setToken(""));
                     navigate(`/login`);
-                }});
+                }
+                if(error.response?.data?.error?.status === 403) {
+                    navigate(`/home`);
+                }
+            });
     }
 
     return (
