@@ -27,8 +27,9 @@ export default function AdminLayout() {
                         <FontAwesomeIcon icon={menuIcon} size="2xl" className="d-md-none" onClick={toggleMobileMenu} />
                     </div>
                     <div className={`nav-links d-flex flex-column justify-content-evenly align-content-center ${linksVisible ? '' : 'hidden'}`}>
-                        <NavLink to="/Admin/Dashboard">Dashboard</NavLink>
-                        <NavLink to="/Admin/Dashboard/Orders">Orders</NavLink>
+                        <Link to="/Admin/Dashboard">Dashboard</Link>
+                        <NavLink to="Orders">Orders</NavLink>
+                        <NavLink to="Products">Products</NavLink>
                     </div>
                 </Col>
                 <Col className='main'>

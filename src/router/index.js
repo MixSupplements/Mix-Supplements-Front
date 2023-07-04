@@ -20,6 +20,7 @@ import OrderDetails from "../pages/Admin/OrderDetails/OrderDetails";
 import Search from "../pages/Search/Search";
 import NotFound from "../pages/NotFound";
 import Checkout from "../pages/Checkout";
+import Products from "../pages/Admin/Products/Products";
 
 const AppRouter = () => {
     const token = useSelector((store) => store.token);
@@ -29,6 +30,9 @@ const AppRouter = () => {
             <Route path="/Admin/Dashboard" element={<AdminLayout />} >
                 <Route path="Orders" element={<Orders />} >
                     <Route path=":status?" element={<OrderList />} />
+                </Route>
+                <Route path="Products" element={<Products />} >
+
                 </Route>
                 <Route path="Order/:orderNumber" element={<OrderDetails />} />
             </Route>
@@ -40,7 +44,7 @@ const AppRouter = () => {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/product/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={token && cart.cartItems.length !==0? <Checkout />: <Shop />} />
+                <Route path="/checkout" element={token && cart.cartItems.length !== 0 ? <Checkout /> : <Shop />} />
                 <Route path="/search/:searchText" element={<Search />} />
                 <Route path="/user/*" element={<UserProfile />}>
                     <Route path="accountDetails/" element={token ? <AccountDetails /> : <Navigate to="/login" />} />

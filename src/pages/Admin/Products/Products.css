@@ -1,0 +1,8 @@
+.products-list td:nth-child(3) a {
+    white-space: nowrap;
+}
+
+.products-list td a {
+    display: block;
+    height: 100%;
+}
