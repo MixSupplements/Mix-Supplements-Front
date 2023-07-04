@@ -13,7 +13,6 @@ footer .brandIcon {
   display: inline-block;
 }
 footer .brand-icon {
-  margin-top: var(--size-500);
   border-radius: 50%;
   transition: 0.5s;
 }
