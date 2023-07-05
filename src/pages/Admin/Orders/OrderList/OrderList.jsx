@@ -1,12 +1,16 @@
 
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { setToken } from '../../../../redux/slices/token';
 import moment from 'moment/moment';
 
 import "./OrderList.css";
 import axiosInstance from '../../../../APIs/config';
 
 export default function OrderList() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     let { status } = useParams();     //used in API call
 
     const [orders, setOrders] = useState([]);
@@ -25,7 +29,17 @@ export default function OrderList() {
             .then((response) => {
                 setOrders(response.data)
             })
-            .catch((error => console.log(error)));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    dispatch(setToken(""));
+                    navigate(`/login`);
+                }
+                if(error.response?.data?.error?.status === 403) {
+                    navigate(`/home`);
+                }
+            });
     }, [status])
 
     return (
