@@ -25,16 +25,16 @@ function Search() {
   }, [location.pathname.split("/")[2]]);
   return (
     <>
-      <section className="row justify-content-center justify-content-md-start pt-4">
+      <section className="row justify-content-center pt-4">
         {loading ? tempCards.map((tempCard)=><div key={tempCard} className="col-5 col-md-4 col-lg-3 p-2">
           <div className="card product-card" >
               <img                    
-                  className="card-img-top skeleton skeleton-img"
+                  className="card-img-top search-skeleton search-skeleton-img"
                   alt=""
               />
               <div className="card-body">
                   <Rating
-                      name="read-only skeleton"
+                      name="read-only search-skeleton"
                       sx={{
                           "& .MuiRating-iconFilled": {
                               color: "hsl(57, 100%, 50%)",
@@ -47,8 +47,8 @@ function Search() {
                       precision={0.5}
                       readOnly
                   />
-                  <h5 className="card-title product-card-title mt-3 skeleton skeleton-text">{}</h5>
-                  <p className="card-text product-card-text skeleton skeleton-price">
+                  <h5 className="card-title product-card-title mt-3 search-skeleton search-skeleton-text">{}</h5>
+                  <p className="card-text product-card-text search-skeleton search-skeleton-price">
                       {}
                   </p>
                   <div className="row justify-content-between fs-4 mt-4">
