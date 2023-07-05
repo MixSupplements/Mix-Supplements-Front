@@ -26,7 +26,7 @@ const Shop = () => {
       .get("/products")
       .then((res) => {
         setAllProducts(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
