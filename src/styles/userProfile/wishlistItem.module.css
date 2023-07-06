@@ -20,7 +20,7 @@
     transition: 0.3s background-color, 0.3s color, 0.3s width !important;
     overflow: hidden !important;
     &:hover {
-        width: 135px;
+        width: 185px;
         color: black !important;
         background-color: var(--clr-primary-400) !important;
     }

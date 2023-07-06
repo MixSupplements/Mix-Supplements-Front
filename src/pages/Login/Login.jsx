@@ -31,8 +31,8 @@ function Login() {
     const navigate = useNavigate();
     const dispatcher = useDispatch();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState();
     const [invalid, setInvalid] = useState();
     const signinSubmit = function (e) {
