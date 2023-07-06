@@ -15,7 +15,7 @@ const UserWishlist = () => {
     return (
         <div className={styles["user-wishlist-container"]}>
             {wishlist.wishlistItems.length ? (
-                wishlist.wishlistItems.map((item) => <WishlistItem key={item._id} item={item} />)
+                wishlist.wishlistItems.map((item) => <WishlistItem key={item._id} product={item} />)
             ) : (
                 <div className={styles["empty-placeholder"]}>No Products In Your Wishlist Yet</div>
             )}
