@@ -4,10 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../../redux/slices/cart";
 import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
 
+import { setToken } from "../../redux/slices/token";
+import { resetCart } from "../../redux/slices/cart";
+
 import { Rating } from "@mui/material";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
+    
     const currencyFormat = (price) => {
         return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
     };
@@ -27,6 +31,15 @@ const ProductCard = ({ product }) => {
         } else {
             dispatcher(addToCart({ item: product, count: 1 }));
         }
+        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("wishlist");
+            localStorage.removeItem("expiredToken")
+            dispatcher(setToken(""));
+            dispatcher(resetCart());
+            navigate(`/login`);
+        }
     };
 
     const wishlist = useSelector((store) => store.wishlist);
@@ -37,6 +50,15 @@ const ProductCard = ({ product }) => {
             dispatcher(removeFromWishlist(product));
         } else {
             dispatcher(addToWishlist(product));
+        }
+        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("wishlist");
+            localStorage.removeItem("expiredToken")
+            dispatcher(setToken(""));
+            dispatcher(resetCart());
+            navigate(`/login`);
         }
     };
     return (

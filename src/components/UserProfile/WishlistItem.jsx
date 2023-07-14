@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { removeFromWishlist } from "../../redux/slices/wishlist";
 import { Link } from "react-router-dom";
-import { addToCart, removeFromCart } from "../../redux/slices/cart";
+import { addToCart, removeFromCart, resetCart } from "../../redux/slices/cart";
+import { setToken } from "../../redux/slices/token";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faTrashCan, faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +11,7 @@ import { faCartPlus, faTrashCan, faCartShopping } from "@fortawesome/free-solid-
 import styles from "../../styles/userProfile/wishlistItem.module.css";
 
 const WishlistItem = ({ product }) => {
+    const navigate = useNavigate();
     const currencyFormat = (price) => {
         return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
     };
@@ -19,8 +22,26 @@ const WishlistItem = ({ product }) => {
         e.stopPropagation();
         if (isInCart) {
             dispatcher(removeFromCart({ item: product, count: 1 }));
+            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
+                localStorage.removeItem("expiredToken")
+                dispatcher(setToken(""));
+                dispatcher(resetCart());
+                navigate(`/login`);
+            }
         } else {
             dispatcher(addToCart({ item: product, count: 1 }));
+            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
+                localStorage.removeItem("expiredToken")
+                dispatcher(setToken(""));
+                dispatcher(resetCart());
+                navigate(`/login`);
+            }
         }
     };
     return (
@@ -43,6 +64,15 @@ const WishlistItem = ({ product }) => {
                             className={`btn ${styles["remove-btn"]} btn-outline-danger`}
                             onClick={() => {
                                 dispatcher(removeFromWishlist(product));
+                                if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                                    localStorage.removeItem("token");
+                                    localStorage.removeItem("cart");
+                                    localStorage.removeItem("wishlist");
+                                    localStorage.removeItem("expiredToken")
+                                    dispatcher(setToken(""));
+                                    dispatcher(resetCart());
+                                    navigate(`/login`);
+                                }
                             }}
                         >
                             <FontAwesomeIcon icon={faTrashCan} />

@@ -48,7 +48,8 @@ const wishlistSlice = createSlice({
                     }
                 })
                 .then(res => console.log('wishlist updated successfully'))
-                .catch(err => console.log(err))
+                .catch(err => {console.log(err);
+                localStorage.setItem("expiredToken", true);})
             }
             state.count += 1;
             state.wishlistItems.push(action.payload);
@@ -62,7 +63,8 @@ const wishlistSlice = createSlice({
                     }
                 })
                 .then(res => console.log('cart updated successfully'))
-                .catch(err => console.log(err))
+                .catch(err => {console.log(err);
+                localStorage.setItem("expiredToken", true);})
             }
             state.count -= 1;
             state.wishlistItems = state.wishlistItems.filter((item) => action.payload._id !== item._id);
