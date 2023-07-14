@@ -6,17 +6,21 @@ import "./App.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCart } from "./redux/slices/cart";
+import { AdminAuthProvider } from "./context/AdminAuth";
 
 function App() {
   const token = localStorage.getItem('token')
   const dispatcher = useDispatch();
   useEffect(() => {
     dispatcher(getCart());
-  },[token, dispatcher])
+  }, [token, dispatcher])
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+
+    <AdminAuthProvider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </AdminAuthProvider>
   );
 }
 

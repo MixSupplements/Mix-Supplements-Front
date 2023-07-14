@@ -1,0 +1,7 @@
+.admin-login {
+    min-height: 100vh;
+}
+
+.admin-login button {
+    background-color: var(--clr-primary-400);
+}

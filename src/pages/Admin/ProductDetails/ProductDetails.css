@@ -1,0 +1,11 @@
+.admin-dashboard .product-details textarea {
+    resize: none;
+}
+
+.admin-dashboard .product-details .product-images {
+    border: dashed 1px;
+}
+
+.admin-dashboard .product-details .back-icon {
+    cursor: pointer;
+}
