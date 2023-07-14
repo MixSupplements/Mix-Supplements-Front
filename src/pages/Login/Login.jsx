@@ -44,6 +44,7 @@ function Login() {
                 stayLoggedIn: rememberMe,
             })
             .then((res) => {
+                localStorage.removeItem("expiredToken");
                 dispatcher(setToken(res.data.token));
                 localStorage.setItem("token", res.data.token);
                 navigate(`/home`);

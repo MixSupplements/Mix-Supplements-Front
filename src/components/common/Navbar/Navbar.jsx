@@ -37,15 +37,15 @@ const Navbar = () => {
           },
         }
       )
-      .then((res) => {
+      .catch((error) => console.log(error))
+      .finally(()=>{
         localStorage.removeItem("token");
         localStorage.removeItem("cart");
         localStorage.removeItem("wishlist");
         dispatch(setToken(""));
         dispatch(resetCart());
         navigate(`/login`);
-      })
-      .catch((error) => console.log(error));
+      });
   };
   const searchSubmit = function (e) {
     e.preventDefault();
