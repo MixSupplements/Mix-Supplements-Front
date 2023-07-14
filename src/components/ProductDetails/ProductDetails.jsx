@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/slices/cart";
+import { addToCart, resetCart } from "../../redux/slices/cart";
+import { setToken } from "../../redux/slices/token";
 import { addToWishlist, removeFromWishlist } from "../../redux/slices/wishlist";
 
 import ProductRate from "./ProductRate";
@@ -18,6 +20,7 @@ import {
 import styles from "../../styles/productPage/productDetails.module.css";
 
 const ProductDetails = ({ product }) => {
+  const navigate = useNavigate();
   const currencyFormat = (price) => {
     return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
   };
@@ -39,8 +42,26 @@ const ProductDetails = ({ product }) => {
     e.stopPropagation();
     if (isInWishlist) {
       dispatcher(removeFromWishlist(product));
+      if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("cart");
+        localStorage.removeItem("wishlist");
+        localStorage.removeItem("expiredToken")
+        dispatcher(setToken(""));
+        dispatcher(resetCart());
+        navigate(`/login`);
+    }
     } else {
       dispatcher(addToWishlist(product));
+      if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("cart");
+        localStorage.removeItem("wishlist");
+        localStorage.removeItem("expiredToken")
+        dispatcher(setToken(""));
+        dispatcher(resetCart());
+        navigate(`/login`);
+    }
     }
   };
   return (
@@ -117,7 +138,17 @@ const ProductDetails = ({ product }) => {
               <button
                 className={`${styles["details-btn"]} btn`}
                 onClick={() =>
-                  dispatcher(addToCart({ item: product, count: 1 }))
+                  {
+                  dispatcher(addToCart({ item: product, count: 1 }));
+                  if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    localStorage.removeItem("expiredToken")
+                    dispatcher(setToken(""));
+                    dispatcher(resetCart());
+                    navigate(`/login`);
+                }}
                 }
                 disabled={product.quantity > 0 ? false : true}
               >

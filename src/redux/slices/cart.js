@@ -40,7 +40,8 @@ const cartSlice = createSlice({
             if(localStorage.getItem('token')){
                 axiosInstance.post(`/cart/${action.payload.item._id}`)
                 .then(res => console.log('cart updated successfully'))
-                .catch(err => console.log(err))
+                .catch(err => {console.log(err);
+                localStorage.setItem("expiredToken", true);})
             }
             state.count += action.payload.count;
             state.totalPrice += action.payload.item.price * action.payload.count;
@@ -51,7 +52,8 @@ const cartSlice = createSlice({
             if(localStorage.getItem('token')){
                 axiosInstance.delete(`/cart/${action.payload.item._id}`)
                 .then(res => console.log('cart updated successfully'))
-                .catch(err => console.log(err))
+                .catch(err => {console.log(err);
+                localStorage.setItem("expiredToken", true);})
             }
             const index = state.cartItems.findIndex(item => item.product._id === action.payload.item._id);
             state.count -= state.cartItems[index].quantity;
@@ -67,7 +69,8 @@ const cartSlice = createSlice({
                 if(localStorage.getItem('token')){
                     axiosInstance.post(`/cart/${action.payload.item._id}`)
                     .then(res => console.log('cart updated successfully'))
-                    .catch(err => console.log(err))
+                    .catch(err => {console.log(err);
+                    localStorage.setItem("expiredToken", true);})
                 }
                 state.count += 1;
                 if(index !== -1){
@@ -81,7 +84,8 @@ const cartSlice = createSlice({
             if(localStorage.getItem('token')){
                 axiosInstance.patch(`/cart/${action.payload.item._id}/decrease`)
                 .then(res => console.log('cart updated successfully'))
-                .catch(err => console.log(err))
+                .catch(err => {console.log(err);
+                localStorage.setItem("expiredToken", true);})
             }
             state.count -= 1;
             const index = state.cartItems.findIndex(item => item.product._id === action.payload.item._id);

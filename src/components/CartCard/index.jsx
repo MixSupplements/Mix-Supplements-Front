@@ -1,12 +1,16 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeFromCart } from "../../redux/slices/cart";
 
+import { setToken } from "../../redux/slices/token";
+import { resetCart } from "../../redux/slices/cart";
 import ProductCounter from "../ProductDetails/ProductCounter";
 
 import "./CartCard.css";
 
 const CartCard = ({ item }) => {
+    const navigate = useNavigate();
+
     const currencyFormat = (price) => {
         return price.toLocaleString("en-US", { minimumFractionDigits: 2 });
     };
@@ -42,6 +46,15 @@ const CartCard = ({ item }) => {
                     <i
                         onClick={() => {
                             dispatcher(removeFromCart({ item: item, count: 1 }));
+                            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                                localStorage.removeItem("token");
+                                localStorage.removeItem("cart");
+                                localStorage.removeItem("wishlist");
+                                localStorage.removeItem("expiredToken")
+                                dispatcher(setToken(""));
+                                dispatcher(resetCart());
+                                navigate(`/login`);
+                            }
                         }}
                         className="fa-solid fa-trash-can"
                     ></i>
