@@ -82,18 +82,18 @@ export default function Products() {
                 </div>
                 <div className="col-sm-6 mt-3 mt-sm-0 ">
                     <div className="input-group">
-                        <select className="form-select border-secondary text-dark-emphasis"
+                        <select className="form-select border-secondary text-dark-emphasis" defaultValue=""
                             onChange={(e) => setSelectedCategory(e.target.value)}>
-                            <option selected value="">All Categories</option>
+                            <option value="">All Categories</option>
                             {categories.map((category) => {
                                 return (
                                     <option key={category._id} value={category.name}>{category.name}</option>
                                 )
                             })}
                         </select>
-                        <select className="form-select border-secondary text-dark-emphasis"
+                        <select className="form-select border-secondary text-dark-emphasis" defaultValue=""
                             onChange={(e) => setSelectedBrand(e.target.value)}>
-                            <option selected value="">All Brands</option>
+                            <option value="">All Brands</option>
                             {brands.map((brand) => {
                                 return (
                                     <option key={brand._id} value={brand.name}>{brand.name}</option>

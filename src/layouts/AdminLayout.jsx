@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faRectangleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import './admin.css'
 import logo from './../assets/images/logo.png';
+import { AdminAuthContext } from '../context/AdminAuth';
 
 export default function AdminLayout() {
     const [menuIcon, setMenuIcon] = useState(faBars);
     const [linksVisible, setLinksVisible] = useState(true);
+    const navigate = useNavigate();
+    const { updateToken } = useContext(AdminAuthContext);
 
     const toggleMobileMenu = () => {
         setMenuIcon((prevIcon) =>
@@ -17,6 +20,13 @@ export default function AdminLayout() {
         );
         setLinksVisible((prevVisible) => !prevVisible);
     };
+
+    const handleLogout = async (e) => {
+        localStorage.removeItem('adminToken');
+        updateToken(null);
+        navigate('/admin/login');
+    };
+
     return (
         <Container fluid className='admin-dashboard'>
             <Row className=''>
@@ -30,6 +40,7 @@ export default function AdminLayout() {
                         <Link to="/Admin/Dashboard">Dashboard</Link>
                         <NavLink to="Orders">Orders</NavLink>
                         <NavLink to="Products">Products</NavLink>
+                        <Link onClick={handleLogout} className=' mt-md-5' >Log out</Link>
                     </div>
                 </Col>
                 <Col className='main'>

@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-
+import { useContext } from "react";
 import { useSelector } from "react-redux";
 
 import PrimaryLayout from "../layouts/PrimaryLayout";
@@ -22,21 +22,29 @@ import NotFound from "../pages/NotFound";
 import Checkout from "../pages/Checkout";
 import Products from "../pages/Admin/Products/Products";
 import Verification from "../pages/Verification";
+import ProductDetails from "../pages/Admin/ProductDetails/ProductDetails";
+import AdminLogin from "../pages/Admin/Login/AdminLogin";
+import { AdminAuthContext } from "../context/AdminAuth";
 
 const AppRouter = () => {
     const token = useSelector((store) => store.token);
     const cart = useSelector((store) => store.cart);
+    const { adminToken } = useContext(AdminAuthContext);
+
     return (
         <Routes>
-            <Route path="/Admin/Dashboard" element={<AdminLayout />} >
-                <Route path="Orders" element={<Orders />} >
+            <Route path="/admin/login" element={adminToken ? <Navigate to="/admin/dashboard" /> : <AdminLogin />} />
+            <Route path="/admin/dashboard" element={adminToken ? <AdminLayout /> : <Navigate to="/admin/login" />} >
+                <Route path="orders" element={<Orders />} >
                     <Route path=":status?" element={<OrderList />} />
                 </Route>
-                <Route path="Products" element={<Products />} >
+                <Route path="order/:orderNumber" element={<OrderDetails />} />
 
-                </Route>
-                <Route path="Order/:orderNumber" element={<OrderDetails />} />
+                <Route path="products" element={<Products />} />
+                <Route path="product/:id?" element={<ProductDetails />} />
             </Route>
+
+
             <Route element={<PrimaryLayout />}>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Home />} />
