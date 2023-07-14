@@ -22,6 +22,7 @@ function Search() {
       .catch((error) => {
         console.log(error);
       });
+      document.querySelector("#searchBar").value = location.pathname.split("/")[2] ;
   }, [location.pathname.split("/")[2]]);
   return (
     <>

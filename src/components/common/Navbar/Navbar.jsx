@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../redux/slices/token";
+import { resetCart } from "../../../redux/slices/cart";
 
 import axiosInstance from "../../../APIs/config";
 
@@ -11,7 +12,6 @@ import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import "./Navbar.css";
 import logo from "../../../assets/images/logo.png";
-import { resetCart } from "../../../redux/slices/cart";
 
 const Navbar = () => {
   const cartCounter = useSelector((store) => store.cart.count);
@@ -19,6 +19,12 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const token = useSelector((store) => store.token);
   const [searchText, setSearchText] = useState();
+  const location = useLocation();
+
+  useEffect(() => {
+    if(!location.pathname.toLowerCase().split("/").includes("search")) document.querySelector("#searchBar").value = "";
+  }, [location.pathname.split("/")[2]]);
+  
   const signoutSubmit = function () {
     axiosInstance
       .post(
@@ -44,7 +50,6 @@ const Navbar = () => {
   const searchSubmit = function (e) {
     e.preventDefault();
     navigate(`/search/${searchText}`);
-    e.target.querySelector("input").value = "";
     e.target.querySelector("input").blur();
   };
   return (
