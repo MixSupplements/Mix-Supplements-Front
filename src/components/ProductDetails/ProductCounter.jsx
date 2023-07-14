@@ -29,15 +29,16 @@ const ProductCounter = ({ item }) => {
                 className={`btn ${styles["counter-btn"]}`}
                 onClick={() => {
                     dispatcher(decreaseCountByOne({ item: item }));
-                    if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("cart");
-                        localStorage.removeItem("wishlist");
-                        localStorage.removeItem("expiredToken")
-                        dispatcher(setToken(""));
-                        dispatcher(resetCart());
-                        navigate(`/login`);
-                    }
+                    setTimeout(()=>{
+                        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("cart");
+                            localStorage.removeItem("wishlist");
+                            localStorage.removeItem("expiredToken");
+                            dispatcher(setToken(""));
+                            dispatcher(resetCart());
+                            navigate(`/login`);
+                    }},500);
                 }}
             >
                 <FontAwesomeIcon icon={faMinus} />
@@ -47,15 +48,16 @@ const ProductCounter = ({ item }) => {
                 className={`btn ${styles["counter-btn"]}`}
                 onClick={() => {
                     dispatcher(increaseCountByOne({ item: item }));
-                    if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("cart");
-                        localStorage.removeItem("wishlist");
-                        localStorage.removeItem("expiredToken")
-                        dispatcher(setToken(""));
-                        dispatcher(resetCart());
-                        navigate(`/login`);
-                    }
+                    setTimeout(()=>{
+                        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("cart");
+                            localStorage.removeItem("wishlist");
+                            localStorage.removeItem("expiredToken");
+                            dispatcher(setToken(""));
+                            dispatcher(resetCart());
+                            navigate(`/login`);
+                    }},500);
                 }}
                 disabled={itemCount < item.quantity ? false : true}
             >

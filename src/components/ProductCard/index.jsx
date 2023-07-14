@@ -31,15 +31,16 @@ const ProductCard = ({ product }) => {
         } else {
             dispatcher(addToCart({ item: product, count: 1 }));
         }
-        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("cart");
-            localStorage.removeItem("wishlist");
-            localStorage.removeItem("expiredToken")
-            dispatcher(setToken(""));
-            dispatcher(resetCart());
-            navigate(`/login`);
-        }
+        setTimeout(()=>{
+            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
+                localStorage.removeItem("expiredToken");
+                dispatcher(setToken(""));
+                dispatcher(resetCart());
+                navigate(`/login`);
+        }},500);
     };
 
     const wishlist = useSelector((store) => store.wishlist);
@@ -51,15 +52,16 @@ const ProductCard = ({ product }) => {
         } else {
             dispatcher(addToWishlist(product));
         }
-        if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("cart");
-            localStorage.removeItem("wishlist");
-            localStorage.removeItem("expiredToken")
-            dispatcher(setToken(""));
-            dispatcher(resetCart());
-            navigate(`/login`);
-        }
+        setTimeout(()=>{
+            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
+                localStorage.removeItem("expiredToken");
+                dispatcher(setToken(""));
+                dispatcher(resetCart());
+                navigate(`/login`);
+        }},500);
     };
     return (
         <div className="col-5 col-md-4 col-lg-3 p-2">

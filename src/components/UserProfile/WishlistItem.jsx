@@ -22,26 +22,28 @@ const WishlistItem = ({ product }) => {
         e.stopPropagation();
         if (isInCart) {
             dispatcher(removeFromCart({ item: product, count: 1 }));
-            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-                localStorage.removeItem("token");
-                localStorage.removeItem("cart");
-                localStorage.removeItem("wishlist");
-                localStorage.removeItem("expiredToken")
-                dispatcher(setToken(""));
-                dispatcher(resetCart());
-                navigate(`/login`);
-            }
+            setTimeout(()=>{
+                if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    localStorage.removeItem("expiredToken");
+                    dispatcher(setToken(""));
+                    dispatcher(resetCart());
+                    navigate(`/login`);
+            }},500);
         } else {
             dispatcher(addToCart({ item: product, count: 1 }));
-            if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-                localStorage.removeItem("token");
-                localStorage.removeItem("cart");
-                localStorage.removeItem("wishlist");
-                localStorage.removeItem("expiredToken")
-                dispatcher(setToken(""));
-                dispatcher(resetCart());
-                navigate(`/login`);
-            }
+            setTimeout(()=>{
+                if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    localStorage.removeItem("expiredToken");
+                    dispatcher(setToken(""));
+                    dispatcher(resetCart());
+                    navigate(`/login`);
+            }},500);
         }
     };
     return (
@@ -64,15 +66,16 @@ const WishlistItem = ({ product }) => {
                             className={`btn ${styles["remove-btn"]} btn-outline-danger`}
                             onClick={() => {
                                 dispatcher(removeFromWishlist(product));
-                                if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
-                                    localStorage.removeItem("token");
-                                    localStorage.removeItem("cart");
-                                    localStorage.removeItem("wishlist");
-                                    localStorage.removeItem("expiredToken")
-                                    dispatcher(setToken(""));
-                                    dispatcher(resetCart());
-                                    navigate(`/login`);
-                                }
+                                setTimeout(()=>{
+                                    if(localStorage.getItem("token") && localStorage.getItem("expiredToken") ) {
+                                        localStorage.removeItem("token");
+                                        localStorage.removeItem("cart");
+                                        localStorage.removeItem("wishlist");
+                                        localStorage.removeItem("expiredToken");
+                                        dispatcher(setToken(""));
+                                        dispatcher(resetCart());
+                                        navigate(`/login`);
+                                }},500);
                             }}
                         >
                             <FontAwesomeIcon icon={faTrashCan} />
