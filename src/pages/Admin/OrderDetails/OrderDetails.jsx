@@ -33,6 +33,8 @@ export default function OrderDetails() {
         Completed: 'Finish',
         Cancelled: 'Cancel'
     });
+
+    const [refreshFlag, setRefreshFlag] = useState(false);
     useEffect(() => {
         window.scrollTo(0, 0);
         // axiosInstance need to be fixed
@@ -43,11 +45,10 @@ export default function OrderDetails() {
                 }
             })
             .then((response) => {
-                console.log(response.data);
                 setOrder(response.data);
             })
             .catch((error => console.log(error)));
-    }, [])
+    }, [refreshFlag])
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -68,22 +69,25 @@ export default function OrderDetails() {
     }
 
     const makeTransition = (transition) => {
-        axiosInstance
-            .patch('/order/' + order._id, {
-                status: transition
-            }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-            .then((response) => {
-                if (response.data.message === "Order status updated successfully")
-                {
-                    setTransitionAction("Done");
-                    order.status = transition;
-                }
-            })
-            .catch((error => console.log(error)));
+
+        const confirmDelete = window.confirm(`Do you want the order to be ${transition} ?`);
+        if (confirmDelete)
+            axiosInstance
+                .patch('/order/' + order._id, {
+                    status: transition
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                .then((response) => {
+                    if (response.data.message === "Order status updated successfully")
+                    {
+                        // setTransitionAction("Done");
+                        setRefreshFlag(!refreshFlag);
+                    }
+                })
+                .catch((error => console.log(error)));
     }
 
     return (

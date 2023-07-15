@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap'
 import "./ProductImageCard.css"
 import axiosInstance from '../../../APIs/config';
 
-export default function ProductImageCard({ image, className, productId }) {
+export default function ProductImageCard({ image, className, productId, setImageFlag }) {
     const [imageView, setImageView] = useState(false);
 
     const deleteImage = (e) => {
@@ -13,7 +13,7 @@ export default function ProductImageCard({ image, className, productId }) {
         {
             axiosInstance.patch(`/product/${productId}/unload/${image.publicId}`)
                 .then(() => {
-                    console.log('Done');
+                    setImageFlag(true);
                 })
                 .catch(error => console.log(error))
         }
@@ -22,7 +22,7 @@ export default function ProductImageCard({ image, className, productId }) {
     return (
         <div className={"card border-secondary-subtle d-flex justify-content-center align-items-center p-3 " + className}>
             <img src={image?.imageUrl} className="card-img" alt="" />
-            <div class="card-img-overlay p-0 m-2 d-flex flex-row-reverse" onClick={() => setImageView(true)}>
+            <div className="card-img-overlay p-0 m-2 d-flex flex-row-reverse" onClick={() => setImageView(true)}>
                 <button className="btn btn-close bg-light" onClick={deleteImage}></button>
             </div>
 
