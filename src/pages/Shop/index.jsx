@@ -12,10 +12,12 @@ import styles from "../../styles/userProfile/userWishlist.module.css";
 const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [filterIsUsed, setFilterIsUsed] = useState(false);
   const [brandFilters, setBrandFilters] = useState([]);
   const [originFilters, setOriginFilters] = useState([]);
   const [weightFilters, setWeightFilters] = useState([]);
+  const [minPriceFilter, setMinPriceFilter] = useState();
+  const [maxPriceFilter, setMaxPriceFilter] = useState();
   const [end, setEnd] = useState(20);
   const [loading, setLoading] = useState(true);
   const tempCards = [1,2,3,4];
@@ -26,7 +28,7 @@ const Shop = () => {
       .get("/products")
       .then((res) => {
         setAllProducts(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -43,8 +45,16 @@ const Shop = () => {
         "originFilters?.some((filter) => filter === product?.details?.origin)"
       );
     if (weightFilters.length > 0)
-      condition.push(
-        "weightFilters?.some((filter) => filter === product?.details?.weight)"
+    condition.push(
+      "weightFilters?.some((filter) => filter === product?.details?.weight)"
+      );
+    if (minPriceFilter)
+    condition.push(
+      "minPriceFilter <= product?.price"
+      );
+    if (maxPriceFilter)
+    condition.push(
+      "maxPriceFilter >= product?.price"
       );
     allProducts?.forEach((product) => {
       if (eval(condition.join("&&"))) {
@@ -53,11 +63,11 @@ const Shop = () => {
     });
     setFilteredProducts(filtered);
 
-    [...document.querySelectorAll("input:checked")].length === 0
-      ? setChecked(false)
-      : setChecked(true);
+    [...document.querySelectorAll("input:checked")].length > 0 || minPriceFilter || maxPriceFilter
+      ? setFilterIsUsed(true)
+      : setFilterIsUsed(false);
     setEnd(20);
-  }, [brandFilters, originFilters, weightFilters, allProducts]);
+  }, [brandFilters, originFilters, weightFilters, minPriceFilter, maxPriceFilter, allProducts]);
 
   return (
     <div className="row justify-content-md-between justify-content-center">
@@ -431,6 +441,59 @@ const Shop = () => {
               </div>
             </div>
           </div>
+          
+          <div className="accordion-item" id="price-filter">
+            <h2 className="accordion-header" id="headingFour">
+              <button
+                className="accordion-button collapsed shop-filter-accordion"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                Price
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              className="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              //   data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body shop-accordion-body">
+                <FormControlLabel
+                  control={
+                    <input className="price-filter-input col-12 m-2 ps-2" placeholder="Min" onKeyDown={e=>{
+                      if(isNaN(e.key) && !e.code.includes("Arrow") && e.key !== "Backspace") {
+                        e.preventDefault();
+                      }
+                    }} onChange={e=>{
+                      setMinPriceFilter(Number(e.target.value));
+                    }}>
+                    </input>
+                  }
+                  // label="Min"
+                />
+
+                <FormControlLabel
+                  control={
+                    <input className="price-filter-input col-12 m-2 ps-2" placeholder="Max" onKeyDown={e=>{
+                      if(isNaN(e.key) && !e.code.includes("Arrow") && e.key !== "Backspace") {
+                        e.preventDefault();
+                      }
+                    }} onChange={e=>{
+                      setMaxPriceFilter(Number(e.target.value));
+                    }}>
+                    </input>
+                  }
+                  // label="Max"
+                />
+
+                
+              </div>
+            </div>
+          </div>
         </div>
       </aside>
       <main className="row col-md-9 justify-content-center justify-content-md-start">
@@ -475,7 +538,7 @@ const Shop = () => {
                   </div>
               </div>
           </div>
-      </div>) : checked ? (
+      </div>) : filterIsUsed ? (
           filteredProducts?.length > 0 ? (
             <>
               {filteredProducts?.slice(0, end).map((product) => {

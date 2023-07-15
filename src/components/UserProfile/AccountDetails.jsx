@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../redux/slices/token";
+import { resetCart } from "../../redux/slices/cart";
+
 import axiosInstance from "../../APIs/config";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +19,8 @@ import {
 import styles from "../../styles/userProfile/accountDetails.module.css";
 
 const AccountDetails = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [userDetails, setUserDetails] = useState({
         firstName: "",
         lastName: "",
@@ -48,7 +55,16 @@ const AccountDetails = () => {
             .then((res) => {
                 setUserDetails(res.data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    dispatch(setToken(""));
+                    dispatch(resetCart());
+                    navigate(`/login`);
+                }});
     }, []);
 
     const handleEdit = () => {
@@ -217,7 +233,16 @@ const AccountDetails = () => {
                 setUserDetails(JSON.parse(JSON.stringify(newDetails)));
                 setIsEditing(false);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    dispatch(setToken(""));
+                    dispatch(resetCart());
+                    navigate(`/login`);
+                }});
     };
     return (
         <>

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../APIs/config";
 import { useNavigate } from "react-router-dom";
 import { resetCart } from "../../redux/slices/cart";
+import { setToken } from "../../redux/slices/token";
 
 const Checkout = () => {
     const [userDetails, setUserDetails] = useState({});
@@ -28,7 +29,16 @@ const Checkout = () => {
                 setUserDetails(res.data);
                 setSelectedValue(res.data.addresses[0])
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                if(error.response?.data?.error?.status === 402) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("wishlist");
+                    dispatcher(setToken(""));
+                    dispatcher(resetCart());
+                    navigate(`/login`);
+                }});
     }, []);
     const cart = useSelector(store => store.cart);
     const currencyFormat = (price) => {
@@ -53,7 +63,16 @@ const Checkout = () => {
             dispatcher(resetCart());
             navigate('/user/orders')
         })
-        .catch(err => console.log(err))
+        .catch((error) => {
+            console.log(error);
+            if(error.response?.data?.error?.status === 402) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("wishlist");
+                dispatcher(setToken(""));
+                dispatcher(resetCart());
+                navigate(`/login`);
+            }});
     }
     return ( 
         <div className="row">

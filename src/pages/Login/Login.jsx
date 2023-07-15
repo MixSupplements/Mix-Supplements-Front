@@ -31,8 +31,8 @@ function Login() {
     const navigate = useNavigate();
     const dispatcher = useDispatch();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState();
     const [invalid, setInvalid] = useState();
     const signinSubmit = function (e) {
@@ -44,6 +44,7 @@ function Login() {
                 stayLoggedIn: rememberMe,
             })
             .then((res) => {
+                localStorage.removeItem("expiredToken");
                 dispatcher(setToken(res.data.token));
                 localStorage.setItem("token", res.data.token);
                 navigate(`/home`);
