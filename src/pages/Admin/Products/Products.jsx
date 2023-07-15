@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axiosInstance from '../../../APIs/config';
 import { Link } from 'react-router-dom';
 import './Products.css'
+import newImage from './../../../assets/images/plus-icon.png';
+
 
 export default function Products() {
     const [products, setProducts] = useState([]);
-    const [renderedProducts, setRenderedProducts] = useState([]);
+    const [renderedProducts, setRenderedProducts] = useState(null);
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
+    const dummyImage = 'https://placehold.co/200';
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -68,6 +72,18 @@ export default function Products() {
 
     }, [searchQuery, selectedBrand, selectedCategory])
 
+    /********************** Product Deletion **********************/
+    const deleteProduct = (product) => {
+        const confirmDelete = window.confirm(`Do you want to delete the product: ${product.name} ?`);
+        if (confirmDelete)
+            axiosInstance.delete(`/product/${product._id}`)
+                .then((response) => {
+                    setRenderedProducts(renderedProducts => renderedProducts.filter(p => p._id !== product._id));
+                })
+                .catch(error => error)
+    }
+
+
     return (
         <div className="products-list mx-3">
             <div className='row mt-4'>
@@ -80,7 +96,7 @@ export default function Products() {
                         </span>
                     </div>
                 </div>
-                <div className="col-sm-6 mt-3 mt-sm-0 ">
+                <div className="d-flex col-sm-6 mt-3 mt-sm-0 ">
                     <div className="input-group">
                         <select className="form-select border-secondary text-dark-emphasis" defaultValue=""
                             onChange={(e) => setSelectedCategory(e.target.value)}>
@@ -101,6 +117,10 @@ export default function Products() {
                             })}
                         </select>
                     </div>
+
+                    <Link to={'/Admin/Dashboard/Product'} className='btn btn-light ms-3  border-secondary'>
+                        <img src={newImage} alt="" style={{ width: '25px' }} />
+                    </Link>
                 </div>
             </div>
 
@@ -117,13 +137,13 @@ export default function Products() {
                         </tr>
                     </thead>
                     <tbody>
-                        {!renderedProducts.length && <tr><td colSpan={6}>No products yet</td></tr>}
-                        {renderedProducts.map(((product) => {
+                        {!renderedProducts && <tr><td colSpan={6}>No products yet</td></tr>}
+                        {renderedProducts && renderedProducts.map(((product) => {
                             return (
                                 <tr key={product?.id}>
                                     <td>
                                         <Link to={`/Admin/Dashboard/Product/${product?._id}`}>
-                                            <img src={product?.images[0].imageUrl} alt="" className='rounded' style={{ width: '50px ' }} />
+                                            <img src={product?.images[0]?.imageUrl || dummyImage} alt="" className='rounded' style={{ width: '50px ' }} />
                                         </Link>
                                     </td>
                                     <td>
@@ -140,6 +160,13 @@ export default function Products() {
                                         <Link to={`/Admin/Dashboard/Product/${product?._id}`}>
                                             {product?.quantity}
                                         </Link>
+                                    </td>
+                                    <td>
+                                        <div className="dropdown">
+                                            <button className="dropdown-item" onClick={() => { deleteProduct(product) }}>
+                                                <FontAwesomeIcon icon={faTrash} className='text-danger' />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
 
